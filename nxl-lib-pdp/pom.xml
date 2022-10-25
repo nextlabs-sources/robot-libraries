@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>nxl-jspringbot-libraries</artifactId>
+    <groupId>com.nextlabs.qa</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>nxl-lib-pdp</artifactId>
+
+  <properties>
+    <libdoc.name>NXLPDP</libdoc.name>
+    <main.basedir>${project.basedir}/..</main.basedir>
+  </properties>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-validator</groupId>
+      <artifactId>commons-validator</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.robotframework</groupId>
+      <artifactId>robotframework</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jspringbot</groupId>
+      <artifactId>jspringbot</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jspringbot</groupId>
+      <artifactId>jspringbot-pretty-logger</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.eclipse.persistence</groupId>
+      <artifactId>eclipselink</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.att</groupId>
+      <artifactId>xacml</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.nextlabs</groupId>
+      <artifactId>java-sdk2</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.nextlabs</groupId>
+      <artifactId>common-framework</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.nextlabs</groupId>
+      <artifactId>controlmanager</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+
+      <plugin>
+        <groupId>org.jvnet.jaxb2.maven2</groupId>
+        <artifactId>maven-jaxb2-plugin</artifactId>
+        <version>0.13.1</version>
+        <executions>
+          <execution>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <schemas>
+            <schema>
+              <url>http://docs.oasis-open.org/xacml/3.0/xacml-core-v3-schema-wd-17.xsd</url>
+            </schema>
+          </schemas>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <!-- Set 1.7 as target, use project source encoding -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.3</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+          <encoding>${project.build.sourceEncoding}</encoding>
+          <optimize>true</optimize>
+          <debug>true</debug>
+          <compilerId>javac</compilerId>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <!-- Build the fat jar with all dependencies -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.6</version>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.jspringbot</groupId>
+        <artifactId>jspringbot-maven-plugin</artifactId>
+        <version>${jspringbot.version}</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <id>libdoc-xml</id>
+            <goals>
+              <goal>libdoc</goal>
+            </goals>
+            <configuration>
+              <outputFile>${libdoc.name}.xml</outputFile>
+            </configuration>
+          </execution>
+          <execution>
+            <phase>package</phase>
+            <id>libodc-html</id>
+            <goals>
+              <goal>libdoc</goal>
+            </goals>
+            <configuration>
+              <outputFile>${libdoc.name}.html</outputFile>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.8</version>
+        <executions>
+          <execution>
+            <phase>install</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target name="Copy script Artifacts to automation kit">
+
+                <mkdir dir="${automationkitDir}/lib" />
+                <mkdir dir="${automationkitDir}/libdoc" />
+
+                <copy todir="${automationkitDir}/lib">
+                  <fileset dir="${project.build.directory}" includes="*-jar-with-dependencies.jar"/>
+                </copy>
+
+                <copy todir="${automationkitDir}/libdoc" failonerror="false">
+                  <fileset dir="${project.build.directory}/robotframework/libdoc" includes="${libdoc.name}.*"/>
+                </copy>
+
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+  </build>
+
+</project>

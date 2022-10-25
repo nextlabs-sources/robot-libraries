@@ -1,0 +1,24 @@
+The NXLJSpringBotGlobal Library is a wrapper for Several JSpringBot Robot Libraries.
+
+The included JSpringBot libraries are:
+
+i18n
+
+xml
+
+json
+
+date
+
+expression
+
+
+= Configuration =
+
+Configure the following to use jspringbot-json.
+
+1. Add {{NXLJSpringBotGlobal}} library in the in the test suite settings.
+
+| *** Settings *** |
+| Library | NXLJSpringBotGlobal |
+

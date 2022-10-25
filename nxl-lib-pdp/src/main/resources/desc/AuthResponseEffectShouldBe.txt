@@ -1,0 +1,7 @@
+The values of response effect is case insensitive.
+
+Beware, the values of effect depends on the request invocation method.
+
+For RMI invocation, the values can be `allow`, `deny` or `dontcare`.
+
+For REST invocation, the values can be `Permit`, `Deny`, `Indeterminate` or `NotApplicable`.

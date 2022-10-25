@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.nextlabs.qa</groupId>
+  <artifactId>nxl-jspringbot-libraries</artifactId>
+
+  <packaging>pom</packaging>
+  <version>1.0-SNAPSHOT</version>
+
+  <name>nxl-jspringbot-libraries</name>
+
+  <modules>
+    <module>nxl-lib-pdp</module>
+    <module>nxl-keywords</module>
+    <module>nxl-lib-general</module>
+    <module>jspringbot-global</module>
+  </modules>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>1.7</java.version>
+    <jspringbot.version>1.5</jspringbot.version>
+    <spring.version>4.2.3.RELEASE</spring.version>
+    <robotframework.version>3.0</robotframework.version>
+    <junit.version>4.12</junit.version>
+    <automationkitDir>${env.AUTOMATIONKIT_DIR}</automationkitDir>
+    <main.basedir>${project.basedir}</main.basedir>
+    <!--<ojdbc7.version>12.1.0.2</ojdbc7.version>-->
+    <!--<postgresql.version>9.4-1205-jdbc42</postgresql.version>-->
+    <!--<sqljdbc4.version>6.0</sqljdbc4.version>-->
+    <powermock.version>1.6.3</powermock.version>
+  </properties>
+
+  <dependencyManagement>
+
+    <dependencies>
+      <dependency>
+        <groupId>org.robotframework</groupId>
+        <artifactId>robotframework</artifactId>
+        <version>${robotframework.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-core</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jspringbot</groupId>
+        <artifactId>jspringbot</artifactId>
+        <version>${jspringbot.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jspringbot</groupId>
+        <artifactId>jspringbot-general</artifactId>
+        <version>${jspringbot.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jspringbot</groupId>
+        <artifactId>jspringbot-selenium</artifactId>
+        <version>${jspringbot.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jspringbot</groupId>
+        <artifactId>jspringbot-i18n</artifactId>
+        <version>${jspringbot.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jspringbot</groupId>
+        <artifactId>jspringbot-ssh</artifactId>
+        <version>${jspringbot.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jspringbot</groupId>
+        <artifactId>jspringbot-xml</artifactId>
+        <version>${jspringbot.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jspringbot</groupId>
+        <artifactId>jspringbot-json</artifactId>
+        <version>${jspringbot.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jspringbot</groupId>
+        <artifactId>jspringbot-csv</artifactId>
+        <version>${jspringbot.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jspringbot</groupId>
+        <artifactId>jspringbot-config</artifactId>
+        <version>${jspringbot.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jspringbot</groupId>
+        <artifactId>jspringbot-test-data</artifactId>
+        <version>${jspringbot.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jspringbot</groupId>
+        <artifactId>jspringbot-date</artifactId>
+        <version>${jspringbot.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jspringbot</groupId>
+        <artifactId>jspringbot-utils</artifactId>
+        <version>${jspringbot.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jspringbot</groupId>
+        <artifactId>jspringbot-db</artifactId>
+        <version>${jspringbot.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jspringbot</groupId>
+        <artifactId>jspringbot-http</artifactId>
+        <version>${jspringbot.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jspringbot</groupId>
+        <artifactId>jspringbot-expression</artifactId>
+        <version>${jspringbot.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jspringbot</groupId>
+        <artifactId>jspringbot-office</artifactId>
+        <version>${jspringbot.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jspringbot</groupId>
+        <artifactId>jspringbot-pretty-logger</artifactId>
+        <version>${jspringbot.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-logging</groupId>
+        <artifactId>commons-logging</artifactId>
+        <version>1.2</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-validator</groupId>
+        <artifactId>commons-validator</artifactId>
+        <version>1.5.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>19.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>2.6.4</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpcore</artifactId>
+        <version>4.4.4</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+        <version>4.5.1</version>
+      </dependency>
+
+      <!-- exported jar from https://github.com/att/XACML -->
+      <dependency>
+        <groupId>com.att</groupId>
+        <artifactId>xacml</artifactId>
+        <version>1.0</version>
+      </dependency>
+
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.powermock</groupId>
+        <artifactId>powermock-module-junit4</artifactId>
+        <version>${powermock.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.powermock</groupId>
+        <artifactId>powermock-api-easymock</artifactId>
+        <version>${powermock.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <!--<dependency>-->
+        <!--<groupId>com.oracle</groupId>-->
+        <!--<artifactId>ojdbc7</artifactId>-->
+        <!--<version>${ojdbc7.version}</version>-->
+      <!--</dependency>-->
+
+      <!--<dependency>-->
+        <!--<groupId>org.postgresql</groupId>-->
+        <!--<artifactId>postgresql</artifactId>-->
+        <!--<version>${postgresql.version}</version>-->
+      <!--</dependency>-->
+
+      <!--<dependency>-->
+        <!--<groupId>com.microsoft.sqlserver</groupId>-->
+        <!--<artifactId>sqljdbc4</artifactId>-->
+        <!--<version>${sqljdbc4.version}</version>-->
+      <!--</dependency>-->
+
+      <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>2.5</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.eclipse.persistence</groupId>
+        <artifactId>eclipselink</artifactId>
+        <version>2.6.1</version>
+      </dependency>
+
+      <!-- Nextlabs libs -->
+      <dependency>
+        <groupId>com.nextlabs</groupId>
+        <artifactId>java-sdk2</artifactId>
+        <version>1.0</version>
+      </dependency>
+
+      <!-- the controlmanager is the jar taken from Perforce depo -->
+      <!-- //depot/Destiny/D_Nimbus/pcv/Nimbus_Main/main/src/server/apps/rest-api-connector/src/lib/nxljpc/agent-controlmanager.jar -->
+      <dependency>
+        <groupId>com.nextlabs</groupId>
+        <artifactId>controlmanager</artifactId>
+        <version>1.0</version>
+      </dependency>
+
+      <!-- the common-framework is the jar taken from P4 repo -->
+      <!-- //depot/Destiny/D_Nimbus/pcv/Nimbus_Main/main/src/server/framework/ -->
+      <dependency>
+        <groupId>com.nextlabs</groupId>
+        <artifactId>common-framework</artifactId>
+        <version>1.0</version>
+      </dependency>
+
+      <!-- all the child modules also need to be added as dependencies, they may depend on each other -->
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>jspringbot-general-standalone</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>jspringbot-json-standalone</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>jspringbot-xml-standalone</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>jspringbot-http-standalone</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>jspringbot-expression-standalone</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>jspringbot-i18n-standalone</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>jspringbot-csv-standalone</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>jspringbot-date-standalone</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>jspringbot-test-data-standalone</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>nxl-lib-pdp</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+    </dependencies>
+
+  </dependencyManagement>
+
+  <repositories>
+
+    <repository>
+      <id>project.local</id>
+      <name>Project Local Repository</name>
+      <url>file:${main.basedir}/libs/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+
+    <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>central</id>
+      <name>Central Repository</name>
+      <url>https://repo.maven.apache.org/maven2</url>
+    </repository>
+
+    <repository>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <id>sonatype-nexus-snapshots</id>
+      <name>Sonatype Nexus Snapshots</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </repository>
+
+    <repository>
+      <id>atlassian-public</id>
+      <name>Atlassian Maven Proxy</name>
+      <url>https://maven.atlassian.com/repository/public</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </repository>
+
+  </repositories>
+
+  <pluginRepositories>
+
+    <pluginRepository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>central</id>
+      <name>Central Repository</name>
+      <url>https://repo.maven.apache.org/maven2</url>
+    </pluginRepository>
+
+    <pluginRepository>
+      <id>sonatype-nexus-snapshots</id>
+      <name>Sonatype Nexus Snapshots</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+          <enabled>true</enabled>
+          <updatePolicy>daily</updatePolicy>
+      </snapshots>
+    </pluginRepository>
+
+  </pluginRepositories>
+
+</project>

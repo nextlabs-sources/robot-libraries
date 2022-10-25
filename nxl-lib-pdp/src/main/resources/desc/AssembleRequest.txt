@@ -1,0 +1,1 @@
+Returns a single request reference. You need to pass at least references for a user, an action, an application and a resource.

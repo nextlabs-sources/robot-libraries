@@ -1,0 +1,57 @@
+Nextlabs PDP Robot Library.
+
+The library provides keywords to assemble PDP requests, and invoke the requests, get response and validate response.
+
+= Configuration =
+
+Configure the following to use nextlabs PDP library.
+
+1. A {{NXLPDP.properties}} file should exist in nxl-automation-kit/properties. See the possible properties below.
+
+  | *Key* | *Description* |
+  | {{PDPHost}} | The host of PDP (JPC), for example: 10.23.58.161 |
+  | {{PDPRMIPort}} | The RMI port of PDP |
+  | {{PDPRESTPort}} | The REST port of PDP |
+  | {{PDPRESTPath}} | The REST endpoint path, for example: `/dpc/PDPConnector/go` |
+
+
+2. Add {{NXLPDP}} library in the in the test suite settings.
+
+| *** Settings *** |
+| Library | NXLPDP |
+
+*Create sample single PDP request*
+| `Start Auth Request`  |
+| ${user1}=	            | `Create Auth User`        | S-1-5-21-830805687-550985140-3285839444-1197  |
+| `Add Auth Attribute`  | ${user1}	                | dept                              	        | Dept1 |
+| ${application1}=      | `Create Auth Application` | word		                                    |
+| ${action1}=	        | `Create Auth Action`      | open                                          |
+| ${host1}=	            | `Create Auth Host`        | 10.63.0.1                                     |
+| ${resource1}=         | `Create Auth Resource`    | Document1.doc                                 | fso   | from  |
+| `Add Auth Attribute`  | ${resource1}              | table                                         | customer      |
+| ${recipient1}=        | `Create Auth Recipient Email` | nobody@nextlabs.com                        |
+| ${request1}=          | `Assemble Request`        | ${user1} | ${application1} | ${action1} | ${host1} | ${resource1} | ${recipient1} |
+
+*Create sample multi PDP request*
+| `Start Auth Request` |
+| ...... |
+| ${multi_request}= | `Assemble MultiRequest` | ${request1} | ${request2} |
+
+*Invoke a PDP request using RMI*
+| @{rmi_results1}= | `Invoke Auth RMI Request` | ${request1} |
+
+*Invoke a PDP request using JSON REST*
+| @{json_results1}= | `Invoke Auth JSON Request` | ${request1} |
+
+*Invoke a PDP request using XML REST*
+| @{xml_results1}= | `Invoke Auth XML Request` | ${request1} |
+
+*Examining PDP response*
+
+Any PDP result returned by keywords `Invoke Auth RMI Request`, `Invoke Auth JSON Request` or `Invoke Auth XML Request` is a list variable even it is a single request.
+
+To check the individual response in the result, you can use list index notation such as `@{result}[0]`.
+
+Keywords like `Auth Response Effect Should Be` and `Auth Response Obligations Count Should Be` can be used to check the response.
+
+Beware, some keywords only apply to certain kinds of result, for example `Auth Response StatusMessage Should Be` only applies to response returned by json and xml requests so you need to refer to the documentation for those keywords.

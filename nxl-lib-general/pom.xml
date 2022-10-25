@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>nxl-jspringbot-libraries</artifactId>
+    <groupId>com.nextlabs.qa</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>nxl-lib-general</artifactId>
+
+  <properties>
+    <main.basedir>${project.basedir}/..</main.basedir>
+  </properties>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.robotframework</groupId>
+      <artifactId>robotframework</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.markusbernhardt</groupId>
+      <artifactId>robotframework-selenium2library-java</artifactId>
+      <version>1.4.0.8</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.robotframework</groupId>
+          <artifactId>robotframework</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+  </dependencies>
+  <build>
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>install</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${automationkitDir}/lib</outputDirectory>
+              <includeScope>compile</includeScope>
+              <includeTypes>jar</includeTypes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.8</version>
+        <executions>
+          <execution>
+            <phase>install</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target name="Copy lib specs to automation kit">
+
+                <mkdir dir="${automationkitDir}/libdoc" />
+
+                <copy todir="${automationkitDir}/libdoc">
+                  <fileset dir="${basedir}/libspecs" includes="**/*.xml"/>
+                </copy>
+
+                <!--Copy lib readme-->
+                <copy todir="${automationkitDir}/libdoc"
+                      file="${main.basedir}/lib_readme.md"
+                />
+
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+  </build>
+
+</project>

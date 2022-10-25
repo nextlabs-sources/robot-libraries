@@ -1,0 +1,5 @@
+Returns a resource reference.
+
+Type can be `fso` (file system object), `portal`, `server`, etc.
+
+Dimension can only be `from` or `to`.

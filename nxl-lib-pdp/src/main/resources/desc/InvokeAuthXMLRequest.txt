@@ -1,0 +1,1 @@
+Invoke XML REST request, returns an array of result reference

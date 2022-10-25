@@ -1,0 +1,19 @@
+Add attribute to given auth entity (such as user, resource), value can be multiple.
+
+Supported entity includes user, host, application, resource, additional data.
+
+*Example*
+
+You can add a single value to an attribute
+
+| `Add Auth Attribute` | ${user1} | dept | Dept1 |
+
+You can add multiple values to an attribute
+
+| `Add Auth Attribute` | ${user1} | dept | Dept1 | Dept2 |
+
+You can also use the keyword multiple times for one attribute, the attribute will also be assigned multi values
+
+| `Add Auth Attribute` | ${user1} | dept | Dept1 |
+| `Add Auth Attribute` | ${user1} | dept | Dept2 |
+

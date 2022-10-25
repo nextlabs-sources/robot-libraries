@@ -1,0 +1,1 @@
+Returns a user reference, id is mandatory, name is optional.

@@ -1,0 +1,3238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keywordspec format="HTML" type="library" generated="20151027 23:11:20" name="Selenium2Library">
+<version>1.4.0.8</version>
+<scope>global</scope>
+<namedargs>yes</namedargs>
+<doc>Selenium2Library is a web testing library for the Robot Framework and was
+ originally written in Python. This is the Java port of the Selenium 2
+ (WebDriver) Python library for Robot Framework. It uses the Selenium 2
+ (WebDriver) libraries internally to control a web browser. See &lt;a
+ href="http://seleniumhq.org/docs/03_webdriver.html"&gt;WebDriver&lt;/a&gt; for more
+ information on Selenium 2 and WebDriver. It runs tests in a real browser
+ instance and should work with most modern browsers and can be used with the
+ Jython interpreter or any other Java application.&lt;br&gt;
+ &lt;br&gt;
+ &lt;span style="font-size: 120%;"&gt;&lt;b&gt;Before running tests&lt;/b&gt;&lt;/span&gt;&lt;br&gt;
+ Prior to running test cases using Selenium2Library, the library must be
+ imported into your Robot Framework test suite (see importing section), and
+ the `Open Browser` keyword must be used to open a browser to the desired
+ location.&lt;br&gt;
+ &lt;br&gt;
+ &lt;span style="font-size: 120%;"&gt;&lt;b&gt;Locating elements&lt;/b&gt;&lt;/span&gt;&lt;br&gt;
+ All keywords in Selenium2Library that need to find an element on the page
+ take an locator argument.&lt;br&gt;
+ &lt;br&gt;
+ &lt;b&gt;Key attributes&lt;/b&gt;&lt;br&gt;
+ By default, when a locator value is provided, it is matched against the key
+ attributes of the particular element type. The attributes &lt;i&gt;id&lt;/i&gt; and
+ &lt;i&gt;name&lt;/i&gt; are key attributes to all elements.&lt;br&gt;
+ &lt;br&gt;
+ List of key attributes:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;b&gt;Element Type&lt;/b&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;b&gt;Key Attributes&lt;/b&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;A&lt;/td&gt;
+ &lt;td&gt;@id,@name,@href,text&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;IMG&lt;/td&gt;
+ &lt;td&gt;@id,@name,@src,@alt&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;INPUT&lt;/td&gt;
+ &lt;td&gt;@id,@name,@value,@src&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;BUTTON&lt;/td&gt;
+ &lt;td&gt;@id,@name,@value,text&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;*&lt;/td&gt;
+ &lt;td&gt;@id,@name&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;br&gt;
+ Example:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Click Element&lt;/td&gt;
+ &lt;td&gt;my_element&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;br&gt;
+ &lt;b&gt;Locator strategies&lt;/b&gt;&lt;br&gt;
+ It is also possible to specify the approach Selenium2Library should take to
+ find an element by specifying a locator strategy with a locator prefix.&lt;br&gt;
+ &lt;br&gt;
+ Supported strategies are:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;b&gt;Strategy&lt;/b&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;b&gt;Example&lt;/b&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;b&gt;Description&lt;/b&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;identifier&lt;/td&gt;
+ &lt;td&gt;Click Element | identifier=my_element&lt;/td&gt;
+ &lt;td&gt;Matches by @id or @name attribute&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;id&lt;/td&gt;
+ &lt;td&gt;Click Element | id=my_element&lt;/td&gt;
+ &lt;td&gt;Matches by @id attribute&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;name&lt;/td&gt;
+ &lt;td&gt;Click Element | name=my_element&lt;/td&gt;
+ &lt;td&gt;Matches by @name attribute&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;xpath&lt;/td&gt;
+ &lt;td&gt;Click Element | xpath=//div[@id='my_element']&lt;/td&gt;
+ &lt;td&gt;Matches by arbitrary XPath expression&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;dom&lt;/td&gt;
+ &lt;td&gt;Click Element | dom=document.images[56]&lt;/td&gt;
+ &lt;td&gt;Matches by arbitrary DOM expression&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;link&lt;/td&gt;
+ &lt;td&gt;Click Element | link=My Link&lt;/td&gt;
+ &lt;td&gt;Matches by the link text&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;css&lt;/td&gt;
+ &lt;td&gt;Click Element | css=div.my_class&lt;/td&gt;
+ &lt;td&gt;Matches by CSS selector&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;jquery&lt;/td&gt;
+ &lt;td&gt;Click Element | jquery=div.my_class&lt;/td&gt;
+ &lt;td&gt;Matches by jQuery/sizzle selector&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;sizzle&lt;/td&gt;
+ &lt;td&gt;Click Element | sizzle=div.my_class&lt;/td&gt;
+ &lt;td&gt;Matches by jQuery/sizzle selector&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;tag&lt;/td&gt;
+ &lt;td&gt;Click Element | tag=div&lt;/td&gt;
+ &lt;td&gt;Matches by HTML tag name&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;br&gt;
+ &lt;b&gt;Locating tables&lt;/b&gt;&lt;br&gt;
+ Table related keywords, such as `Table Should Contain`, work differently. By
+ default, when a table locator value is provided, it will search for a table
+ with the specified id attribute.&lt;br&gt;
+ &lt;br&gt;
+ Example:&lt;br&gt;
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Table Should Contain&lt;/td&gt;
+ &lt;td&gt;my_table&lt;/td&gt;
+ &lt;td&gt;text&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;br&gt;
+ More complex table locator strategies:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;b&gt;Strategy&lt;/b&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;b&gt;Example&lt;/b&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;b&gt;Description&lt;/b&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;xpath&lt;/td&gt;
+ &lt;td&gt;Table Should Contain | xpath=//table/[@name="my_table"] | text&lt;/td&gt;
+ &lt;td&gt;Matches by arbitrary XPath expression&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;css&lt;/td&gt;
+ &lt;td&gt;Table Should Contain | css=table.my_class | text&lt;/td&gt;
+ &lt;td&gt;Matches by CSS selector&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;br&gt;
+ &lt;b&gt;Custom location strategies&lt;/b&gt;&lt;br&gt;
+ It is also possible to register custom location strategies. See `Add Location
+ Strategy` for details about custom location strategies.&lt;br&gt;
+ &lt;br&gt;
+ Example:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Add Location Strategy&lt;/td&gt;
+ &lt;td&gt;custom&lt;/td&gt;
+ &lt;td&gt;return window.document.getElementById(arguments[0]);&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Input Text&lt;/td&gt;
+ &lt;td&gt;custom=firstName&lt;/td&gt;
+ &lt;td&gt;Max&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;br&gt;
+ &lt;span style="font-size: 120%;"&gt;&lt;b&gt;Timeouts&lt;/b&gt;&lt;/span&gt;&lt;br&gt;
+ There are several Wait ... keywords that take &lt;b&gt;timeout&lt;/b&gt; as an argument.
+ All of these timeout arguments are optional. The timeout used by all of them
+ can be set globally using the `Set Selenium Timeout keyword`.&lt;br&gt;
+ &lt;br&gt;
+ All timeouts can be given as numbers considered seconds (e.g. 0.5 or 42) or
+ in Robot Framework's time syntax (e.g. '1.5 seconds' or '1 min 30 s'). See &lt;a
+ href=
+ "http://robotframework.googlecode.com/svn/trunk/doc/userguide/RobotFrameworkUserGuide.html#time-format"
+ &gt;Time Format&lt;/a&gt; for details about the time syntax.&lt;br&gt;
+ &lt;br&gt;
+ &lt;span style="font-size: 120%;"&gt;&lt;b&gt;Log Level&lt;/b&gt;&lt;/span&gt;&lt;br&gt;
+ There are several keywords that take &lt;b&gt;timeout&lt;/b&gt; as an argument. All of
+ these timeout arguments are optional. The default is usually INFO.&lt;br&gt;
+ &lt;br&gt;
+ List of log levels:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;b&gt;Log Level&lt;/b&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;b&gt;Description&lt;/b&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;DEBUG&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;INFO&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;HTML&lt;/td&gt;
+ &lt;td&gt;Same as INFO, but message is in HTML format&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;TRACE&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;WARN&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;</doc>
+<init>
+<arguments>
+<arg>arg1=</arg>
+<arg>arg2=</arg>
+<arg>arg3=</arg>
+</arguments>
+<doc>Selenium2Library can be imported with optional arguments.&lt;br&gt;
+ &lt;br&gt;
+ &lt;b&gt;timeout&lt;/b&gt; is the default timeout used to wait for all waiting
+ actions. It can be changed later with `Set Selenium Timeout`.&lt;br&gt;
+ &lt;br&gt;
+ &lt;b&gt;implicitWait&lt;/b&gt; is the implicit timeout that Selenium waits, when
+ looking for elements. It can be changed later with `Set Selenium Implicit
+ Wait`. See &lt;a
+ href="http://docs.seleniumhq.org/docs/04_webdriver_advanced.jsp"
+ &gt;WebDriver: Advanced Usage&lt;/a&gt; of the SeleniumHQ documentation for
+ details about WebDriver's implicit wait functionality.&lt;br&gt;
+ &lt;br&gt;
+ &lt;b&gt;runOnFailure&lt;/b&gt; specifies the name of a keyword (from any available
+ libraries) to execute when a Selenium2Library keyword fails. By default
+ `Capture Page Screenshot` will be used to take a screenshot of the
+ current page. Using the value \"Nothing\" will disable this feature
+ altogether. See `Register Keyword To Run On Failure` keyword for details
+ about this functionality.&lt;br&gt;
+ &lt;br&gt;
+ Examples:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Library&lt;/td&gt;
+ &lt;td&gt;Selenium2Library&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Library&lt;/td&gt;
+ &lt;td&gt;Selenium2Library&lt;/td&gt;
+ &lt;td&gt;15&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;# Sets timeout to 15 seconds&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Library&lt;/td&gt;
+ &lt;td&gt;Selenium2Library&lt;/td&gt;
+ &lt;td&gt;0&lt;/td&gt;
+ &lt;td&gt;5&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;# Sets timeout to 0 seconds and implicitWait to 5 seconds&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Library&lt;/td&gt;
+ &lt;td&gt;Selenium2Library&lt;/td&gt;
+ &lt;td&gt;0&lt;/td&gt;
+ &lt;td&gt;5&lt;/td&gt;
+ &lt;td&gt;Log Source&lt;/td&gt;
+ &lt;td&gt;# Sets timeout to 0 seconds, implicitWait to 5 seconds and runs `Log
+ Source` on failure&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Library&lt;/td&gt;
+ &lt;td&gt;Selenium2Library&lt;/td&gt;
+ &lt;td&gt;0&lt;/td&gt;
+ &lt;td&gt;5&lt;/td&gt;
+ &lt;td&gt;Nothing&lt;/td&gt;
+ &lt;td&gt;# Sets timeout to 0 seconds, implicitWait to 5 seconds and does
+ nothing on failure&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;</doc>
+<tags>
+</tags>
+</init>
+<kw name="Add Cookie">
+<arguments>
+<arg>name</arg>
+<arg>value</arg>
+<arg>path=NONE</arg>
+<arg>domain=NONE</arg>
+<arg>secure=NONE</arg>
+<arg>expiry=NONE</arg>
+</arguments>
+<doc>Adds a cookie to your current session.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;name&lt;/b&gt;&amp;nbsp;The name of the cookie.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;value&lt;/b&gt;&amp;nbsp;The cookie value.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;path&lt;/b&gt;&amp;nbsp;Default=NONE. The path the cookie is visible to.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;domain&lt;/b&gt;&amp;nbsp;Default=NONE. The domain the cookie is visible to.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;secure&lt;/b&gt;&amp;nbsp;Default=NONE. Whether this cookie requires a secure
+            connection.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;expiry&lt;/b&gt;&amp;nbsp;Default=NONE. The cookie's expiration date&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Add Location Strategy">
+<arguments>
+<arg>strategyName</arg>
+<arg>functionDefinition</arg>
+<arg>delimiter=NONE</arg>
+</arguments>
+<doc>Registers a JavaScript function as locator with the specified strategy
+ name.&lt;br&gt;
+ &lt;br&gt;
+ The registered function has to return a WebElement, a List of WebElements
+ or null. Optionally a delimiter can be given to split the value of the
+ locator in multiple arguments when executing the JavaScript function. &lt;br&gt;
+ &lt;br&gt;
+ Example:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Add Location Strategy&lt;/td&gt;
+ &lt;td&gt;byId&lt;/td&gt;
+ &lt;td&gt;return window.document.getElementById(arguments[0]);&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Input Text&lt;/td&gt;
+ &lt;td&gt;byId=firstName&lt;/td&gt;
+ &lt;td&gt;Max&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;br&gt;
+ Example with delimiter:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Add Location Strategy&lt;/td&gt;
+ &lt;td&gt;byClassname&lt;/td&gt;
+ &lt;td&gt;return
+ window.document.getElementsByClassName(arguments[0])[arguments[1]];&lt;/td&gt;
+ &lt;td&gt;,&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Input Text&lt;/td&gt;
+ &lt;td&gt;byClassname=input,3&lt;/td&gt;
+ &lt;td&gt;Max&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;strategyName&lt;/b&gt;&amp;nbsp;Name of the location strategy.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;functionDefinition&lt;/b&gt;&amp;nbsp;The JavaScript function to register.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;delimiter&lt;/b&gt;&amp;nbsp;Default=NONE. The delimiter to split the given locator value&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Alert Should Be Present">
+<arguments>
+<arg>text=NONE</arg>
+</arguments>
+<doc>Verify an alert is present and dismiss it.&lt;br&gt;
+ &lt;br&gt;
+ If &lt;b&gt;text&lt;/b&gt; is a non-empty string, then it is also verified that the
+ message of the alert equals to text.&lt;br&gt;
+ &lt;br&gt;
+ Will fail if no alert is present. Note that following keywords will fail
+ unless the alert is confirmed by this keyword or another like `Confirm
+ Action`.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;Default=NONE. The alert message to verify.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Assign Id To Element">
+<arguments>
+<arg>locator</arg>
+<arg>id</arg>
+</arguments>
+<doc>Assigns a temporary identifier to the element identified by
+ &lt;b&gt;locator&lt;/b&gt;&lt;br&gt;
+ &lt;br&gt;
+ This is mainly useful, when the locator is a complicated and slow XPath
+ expression. The identifier expires when the page is reloaded.&lt;br&gt;
+ &lt;br&gt;
+ Example:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Assign ID to Element&lt;/td&gt;
+ &lt;td&gt;xpath=//div[@id=\"first_div\"]&lt;/td&gt;
+ &lt;td&gt;my id&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Page Should Contain Element&lt;/td&gt;
+ &lt;td&gt;my id&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;id&lt;/b&gt;&amp;nbsp;The id to assign.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Capture Page Screenshot">
+<arguments>
+<arg>filename=NONE</arg>
+</arguments>
+<doc>Take a screenshot of the current page and embed it into the log.&lt;br&gt;
+ &lt;br&gt;
+ The &lt;b&gt;filename&lt;/b&gt; argument specifies the name of the file to write the
+ screenshot into. If no filename is given, the screenshot is saved into
+ file selenium-screenshot-&amp;lt;counter&amp;gt;.png under the directory where
+ the Robot Framework log file is written into. The filename is also
+ considered relative to the same directory, if it is not given in absolute
+ format.&lt;br&gt;
+ &lt;br&gt;
+ A CSS can be used to modify how the screenshot is taken. By default the
+ background color is changed to avoid possible problems with background
+ leaking when the page layout is somehow broken.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;filename&lt;/b&gt;&amp;nbsp;Default=NONE. Name of the file to write.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Checkbox Should Be Selected">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Verify the checkbox identified by &lt;b&gt;locator&lt;/b&gt; is selected/checked.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for checkboxes are id and name. See `Introduction` for
+ details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the checkbox.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Checkbox Should Not Be Selected">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Verify the checkbox identified by &lt;b&gt;locator&lt;/b&gt; is not selected/checked.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for checkboxes are id and name. See `Introduction` for
+ details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the checkbox.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Choose Cancel On Confirmation">
+<arguments>
+</arguments>
+<doc>Cancel will as default be selected from now on every time a confirmation
+ dialog appears.&lt;br&gt;
+ &lt;br&gt;
+ Note that every time a confirmation comes up, it must be confirmed by the
+ keywords 'Alert Should Be Present' or `Confirm Action`. Otherwise all
+ following operations will fail.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Choose Cancel On Next Confirmation">
+<arguments>
+</arguments>
+<doc>Cancel will be selected the next time a confirmation dialog appears.&lt;br&gt;
+ &lt;br&gt;
+ Note that every time a confirmation comes up, it must be confirmed by the
+ keywords 'Alert Should Be Present' or `Confirm Action`. Otherwise all
+ following operations will fail.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Choose File">
+<arguments>
+<arg>locator</arg>
+<arg>filePath</arg>
+</arguments>
+<doc>Types the given &lt;b&gt;filePath&lt;/b&gt; into the input field identified by
+ &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ This keyword is most often used to input files into upload forms. The
+ file specified with filePath must be available on the same host where the
+ Selenium Server is running.&lt;br&gt;
+ &lt;br&gt;
+ Example:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Choose File&lt;/td&gt;
+ &lt;td&gt;my_upload_field&lt;/td&gt;
+ &lt;td&gt;/home/user/files/trades.csv&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+ Key attributes for input fields are id and name. See `Introduction` for
+ details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the input field.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;filePath&lt;/b&gt;&amp;nbsp;The file path to input&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Choose Ok On Confirmation">
+<arguments>
+</arguments>
+<doc>Ok will as default be selected from now on every time a confirmation
+ dialog appears.&lt;br&gt;
+ &lt;br&gt;
+ Note that every time a confirmation comes up, it must be confirmed by the
+ keywords 'Alert Should Be Present' or `Confirm Action`. Otherwise all
+ following operations will fail.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Choose Ok On Next Confirmation">
+<arguments>
+</arguments>
+<doc>Ok will be selected the next time a confirmation dialog appears.&lt;br&gt;
+ &lt;br&gt;
+ Note that every time a confirmation comes up, it must be confirmed by the
+ keywords 'Alert Should Be Present' or `Confirm Action`. Otherwise all
+ following operations will fail.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Clear Element Text">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Clears the text from element identified by &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ This keyword does not execute any checks on whether or not the clear
+ method has succeeded, so if any subsequent checks are needed, they should
+ be executed using method `Element Text Should Be`.&lt;br&gt;
+ &lt;br&gt;
+ Also, this method will use WebDriver's internal _element.clear()_ method,
+ i.e. it will not send any keypresses, and it will not have any effect
+ whatsoever on elements other than input textfields or input textareas.
+ Clients relying on keypresses should implement their own methods.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Click Button">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Click on the button identified by &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for buttons are id, name and value. See `Introduction` for
+ details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the link.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Click Element">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Click on the element identified by &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Click Element At Coordinates">
+<arguments>
+<arg>locator</arg>
+<arg>xOffset</arg>
+<arg>yOffset</arg>
+</arguments>
+<doc>Click on the element identified by &lt;b&gt;locator&lt;/b&gt; at the coordinates
+ &lt;b&gt;xOffset&lt;/b&gt; and &lt;b&gt;yOffset&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ The cursor is moved at the center of the element and the to the given x/y
+ offset from that point. Both offsets are specified as negative (left/up)
+ or positive (right/down) number.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;
+ &lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;xOffset&lt;/b&gt;&amp;nbsp;The horizontal offset in pixel. Negative means left, positive
+            right.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;yOffset&lt;/b&gt;&amp;nbsp;The vertical offset in pixel. Negative means up, positive
+            down.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Click Image">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Click on the image identified by &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for images are id, src and alt. See `Introduction` for
+ details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Click Link">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Click on the link identified by &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for links are id, name, href and link text. See
+ `Introduction` for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the link.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Close All Browsers">
+<arguments>
+</arguments>
+<doc>Closes all open browser instances and resets the browser cache.&lt;br&gt;
+ &lt;br&gt;
+ After this keyword new indexes returned from `Open Browser` keyword are
+ reset to 1. This keyword should be used in test or suite teardown to make
+ sure all browsers are closed.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Close Browser`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Open Browser`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Switch Browser`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Close Browser">
+<arguments>
+</arguments>
+<doc>Closes the current browser instance.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Close All Browsers`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Open Browser`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Switch Browser`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Close Window">
+<arguments>
+</arguments>
+<doc>Closes the currently open pop-up window.</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Confirm Action">
+<arguments>
+</arguments>
+<doc>Dismisses currently shown confirmation dialog and returns its message.&lt;br&gt;
+ &lt;br&gt;
+ By default, this keyword chooses 'OK' option from the dialog. If 'Cancel'
+ needs to be chosen, keyword `Choose Cancel On Next Confirmation` must be
+ called before the action that causes the confirmation dialog to be shown.&lt;br&gt;
+ &lt;br&gt;
+ Example:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Click Button&lt;/td&gt;
+ &lt;td&gt;Send&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;# Shows a confirmation dialog&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;${message}=&lt;/td&gt;
+ &lt;td&gt;Confirm Action&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;# Chooses Ok&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Should Be Equal&lt;/td&gt;
+ &lt;td&gt;${message}&lt;/td&gt;
+ &lt;td&gt;Are your sure?&lt;/td&gt;
+ &lt;td&gt;# Check dialog message&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Choose Cancel On Next Confirmation&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;# Choose cancel on next `Confirm Action`&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Click Button&lt;/td&gt;
+ &lt;td&gt;Send&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;# Shows a confirmation dialog&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Confirm Action&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;# Chooses Cancel&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The dialog message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Current Frame Contains">
+<arguments>
+<arg>text</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the current frame contains &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about log levels.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Current Frame Should Not Contain">
+<arguments>
+<arg>text</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the current frame does not contain &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about log levels.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Delete All Cookies">
+<arguments>
+</arguments>
+<doc>Deletes all cookies.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Delete Cookie">
+<arguments>
+<arg>name</arg>
+</arguments>
+<doc>Deletes cookie matching &lt;b&gt;name&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ If the cookie is not found, nothing happens&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;name&lt;/b&gt;&amp;nbsp;The name of the cookie to delete.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Double Click Element">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Double-Click on the element identified by &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Drag And Drop">
+<arguments>
+<arg>source</arg>
+<arg>target</arg>
+</arguments>
+<doc>Drag the element identified by the locator &lt;b&gt;source&lt;/b&gt; and move it on
+ top of the element identified by the locator &lt;b&gt;target&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;
+ &lt;br&gt;
+ Example:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Drag And Drop&lt;/td&gt;
+ &lt;td&gt;elem1&lt;/td&gt;
+ &lt;td&gt;elem2&lt;/td&gt;
+ &lt;td&gt;# Move elem1 over elem2&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;source&lt;/b&gt;&amp;nbsp;The locator to locate the element to drag.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;target&lt;/b&gt;&amp;nbsp;The locator to locate the element where to drop the dragged
+            element.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Drag And Drop By Offset">
+<arguments>
+<arg>source</arg>
+<arg>xOffset</arg>
+<arg>yOffset</arg>
+</arguments>
+<doc>Drag the element identified by the locator &lt;b&gt;source&lt;/b&gt; and move it by
+ &lt;b&gt;xOffset&lt;/b&gt; and &lt;b&gt;yOffset&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Both offsets are specified as negative (left/up) or positive (right/down)
+ number.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;
+ &lt;br&gt;
+ Example:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Drag And Drop By Offset&lt;/td&gt;
+ &lt;td&gt;elem1&lt;/td&gt;
+ &lt;td&gt;50&lt;/td&gt;
+ &lt;td&gt;35&lt;/td&gt;
+ &lt;td&gt;# Move elem1 50px right and 35px down.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;source&lt;/b&gt;&amp;nbsp;The locator to locate the element to drag.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;xOffset&lt;/b&gt;&amp;nbsp;The horizontal offset in pixel. Negative means left, positive
+            right.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;yOffset&lt;/b&gt;&amp;nbsp;The vertical offset in pixel. Negative means up, positive
+            down.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Element Should Be Clickable">
+<arguments>
+<arg>locator</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Verify the element identified by &lt;b&gt;locator&lt;/b&gt; is clickable.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Element Should Be Disabled">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Verify the element identified by &lt;b&gt;locator&lt;/b&gt; is disabled.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Element Should Be Enabled">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Verify the element identified by &lt;b&gt;locator&lt;/b&gt; is enabled.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Element Should Be Selected">
+<arguments>
+<arg>locator</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Verify the element identified by &lt;b&gt;locator&lt;/b&gt; is selected.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Element Should Be Visible">
+<arguments>
+<arg>locator</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Verify the element identified by &lt;b&gt;locator&lt;/b&gt; is visible.&lt;br&gt;
+ &lt;br&gt;
+ Herein, visible means that the element is logically visible, not
+ optically visible in the current browser viewport. For example, an
+ element that carries display:none is not logically visible, so using this
+ keyword on that element would fail.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Element Should Contain">
+<arguments>
+<arg>locator</arg>
+<arg>text</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Verify the element identified by &lt;b&gt;locator&lt;/b&gt; contains &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about locators.&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Element Should Not Be Clickable">
+<arguments>
+<arg>locator</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Verify the element identified by &lt;b&gt;locator&lt;/b&gt; is not clickable.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Element Should Not Be Selected">
+<arguments>
+<arg>locator</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Verify the element identified by &lt;b&gt;locator&lt;/b&gt; is not selected.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Element Should Not Be Visible">
+<arguments>
+<arg>locator</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Verify the element identified by &lt;b&gt;locator&lt;/b&gt; is not visible.&lt;br&gt;
+ &lt;br&gt;
+ Herein, visible means that the element is logically visible, not
+ optically visible in the current browser viewport. For example, an
+ element that carries display:none is not logically visible, so using this
+ keyword on that element would fail.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Element Should Not Contain">
+<arguments>
+<arg>locator</arg>
+<arg>text</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Verify the element identified by &lt;b&gt;locator&lt;/b&gt; does not contain
+ &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about locators.&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Element Text Should Be">
+<arguments>
+<arg>locator</arg>
+<arg>text</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Verify the text of the element identified by &lt;b&gt;locator&lt;/b&gt; is exactly
+ &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ In contrast to `Element Should Contain`, this keyword does not try a
+ substring match but an exact match on the element identified by locator.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Element Text Should Not Be">
+<arguments>
+<arg>locator</arg>
+<arg>text</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Verify the text of the element identified by &lt;b&gt;locator&lt;/b&gt; is not
+ exactly &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ In contrast to `Element Should Not Contain`, this keyword does not try a
+ substring match but an exact match on the element identified by locator.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Execute Async Javascript">
+<arguments>
+<arg>*code</arg>
+</arguments>
+<doc>Execute the given JavaScript &lt;b&gt;code&lt;/b&gt; asynchronously.&lt;br&gt;
+ &lt;br&gt;
+ The given code may contain multiple lines of code, but must contain a
+ return statement (with the value to be returned) at the end.&lt;br&gt;
+ &lt;br&gt;
+ The given code may be divided into multiple cells in the test data. In
+ that case, the parts are concatenated together without adding spaces. If
+ the given code is an absolute path to an existing file, the JavaScript to
+ execute will be read from that file. Forward slashes work as a path
+ separator on all operating systems.&lt;br&gt;
+ &lt;br&gt;
+ Note that by default the code will be executed in the context of the
+ Selenium object itself, so &lt;b&gt;this&lt;/b&gt; will refer to the Selenium object.
+ Use &lt;b&gt;window&lt;/b&gt; to refer to the window of your application, e.g.
+ &lt;i&gt;window.document.getElementById('foo')&lt;/i&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Example:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Execute Async JavaScript&lt;/td&gt;
+ &lt;td&gt;return window.my_js_function('arg1', 'arg2');&lt;/td&gt;
+ &lt;td&gt;# Directly execute the JavaScript&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Execute Async JavaScript&lt;/td&gt;
+ &lt;td&gt;${CURDIR}/js_to_execute.js&lt;/td&gt;
+ &lt;td&gt;# Load the JavaScript to execute from file&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;code&lt;/b&gt;&amp;nbsp;The JavaScript code or a file name.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The return value of the executed code.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Execute Javascript">
+<arguments>
+<arg>*code</arg>
+</arguments>
+<doc>Execute the given JavaScript &lt;b&gt;code&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ The given code may contain multiple lines of code, but must contain a
+ return statement (with the value to be returned) at the end.&lt;br&gt;
+ &lt;br&gt;
+ The given code may be divided into multiple cells in the test data. In
+ that case, the parts are concatenated together without adding spaces. If
+ the given code is an absolute path to an existing file, the JavaScript to
+ execute will be read from that file. Forward slashes work as a path
+ separator on all operating systems.&lt;br&gt;
+ &lt;br&gt;
+ Note that by default the code will be executed in the context of the
+ Selenium object itself, so &lt;b&gt;this&lt;/b&gt; will refer to the Selenium object.
+ Use &lt;b&gt;window&lt;/b&gt; to refer to the window of your application, e.g.
+ &lt;i&gt;window.document.getElementById('foo')&lt;/i&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Example:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Execute JavaScript&lt;/td&gt;
+ &lt;td&gt;return window.my_js_function('arg1', 'arg2');&lt;/td&gt;
+ &lt;td&gt;# Directly execute the JavaScript&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Execute JavaScript&lt;/td&gt;
+ &lt;td&gt;${CURDIR}/js_to_execute.js&lt;/td&gt;
+ &lt;td&gt;# Load the JavaScript to execute from file&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;code&lt;/b&gt;&amp;nbsp;The JavaScript code or a file name.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The return value of the executed code.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Focus">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Set the focus to the element identified by &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Frame Should Contain">
+<arguments>
+<arg>locator</arg>
+<arg>text</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the frame identified by &lt;b&gt;locator&lt;/b&gt; contains &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about locators.&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the frame.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Frame Should Not Contain">
+<arguments>
+<arg>locator</arg>
+<arg>text</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the frame identified by &lt;b&gt;locator&lt;/b&gt; does not contain
+ &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about locators.&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the frame.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get Alert Message">
+<arguments>
+</arguments>
+<doc>Returns the text of current JavaScript alert.&lt;br&gt;
+ &lt;br&gt;
+ This keyword will fail if no alert is present. Note that following
+ keywords will fail unless the alert is confirmed by the keywords 'Alert
+ Should Be Present' or `Confirm Action`.&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The alert message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get All Links">
+<arguments>
+</arguments>
+<doc>Returns a list containing ids of all links found in current page.&lt;br&gt;
+ &lt;br&gt;
+ If a link has no id, an empty string will be in the list instead.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The list of link ids.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get Cookie Value">
+<arguments>
+<arg>name</arg>
+</arguments>
+<doc>Returns value of cookie found with &lt;b&gt;name&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ If no cookie is found with name, this keyword fails.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;name&lt;/b&gt;&amp;nbsp;The name of the cookie&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The value of the found cookie&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get Cookies">
+<arguments>
+</arguments>
+<doc>Returns all cookies of the current page.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;All cookies of the current page.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get Element Attribute">
+<arguments>
+<arg>attributeLocator</arg>
+</arguments>
+<doc>Returns the value of an element attribute.&lt;br&gt;
+ &lt;br&gt;
+ The &lt;b&gt;attribute_locator&lt;/b&gt; consists of element locator followed by an @
+ sign and attribute name. Example: element_id@class&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;attributeLocator&lt;/b&gt;&amp;nbsp;The attribute locator.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The attribute value.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get Horizontal Position">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Returns horizontal position of element identified by &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ The position is returned in pixels off the left side of the page, as an
+ integer. Fails if the matching element is not found.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The horizontal position&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get List Items">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Returns the values in the select list identified by &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Select list keywords work on both lists and combo boxes. Key attributes
+ for select lists are id and name. See `Introduction` for details about
+ locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the select list.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The select list values&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get Location">
+<arguments>
+</arguments>
+<doc>Returns the current location.&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The current location.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Log Location`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get Matching Xpath Count">
+<arguments>
+<arg>xpath</arg>
+</arguments>
+<doc>Returns the number of elements located the given &lt;b&gt;xpath&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ If you wish to assert the number of located elements, use `Xpath Should
+ Match X Times`.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;xpath&lt;/b&gt;&amp;nbsp;The XPath to match page elements&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The number of located elements&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get Remote Capabilities">
+<arguments>
+</arguments>
+<doc>Returns the actually supported capabilities of the remote browser
+ instance.&lt;br&gt;
+ &lt;br&gt;
+ Not all server implementations will support every WebDriver feature.
+ Therefore, the client and server should use JSON objects with the
+ properties listed below when describing which features a user requests
+ that a session support. &lt;b&gt;If a session cannot support a capability that
+ is requested in the desired capabilities, no error is thrown;&lt;/b&gt; a
+ read-only capabilities object is returned that indicates the capabilities
+ the session actually supports. For more information see: &lt;a href=
+ "http://code.google.com/p/selenium/wiki/DesiredCapabilities"
+ &gt;DesiredCapabilities&lt;/a&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The capabilities of the remote node.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Log Remote Capabilities`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get Remote Session Id">
+<arguments>
+</arguments>
+<doc>Returns the session id of the remote browser instance.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The remote session id.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Log Remote Session Id`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get Selected List Label">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Returns the visible label of the first selected element from the select
+ list identified by &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Select list keywords work on both lists and combo boxes. Key attributes
+ for select lists are id and name. See `Introduction` for details about
+ locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the select list.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The first visible select list label&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get Selected List Labels">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Returns the visible labels of the first selected elements as a list from
+ the select list identified by &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Fails if there is no selection.&lt;br&gt;
+ &lt;br&gt;
+ Select list keywords work on both lists and combo boxes. Key attributes
+ for select lists are id and name. See `Introduction` for details about
+ locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the select list.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The list of visible select list labels&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get Selected List Value">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Returns the value of the first selected element from the select list
+ identified by &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ The return value is read from the value attribute of the selected
+ element.&lt;br&gt;
+ &lt;br&gt;
+ Select list keywords work on both lists and combo boxes. Key attributes
+ for select lists are id and name. See `Introduction` for details about
+ locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the select list.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The first select list value&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get Selected List Values">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Returns the values of the first selected elements as a list from the
+ select list identified by &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Fails if there is no selection. The return values are read from the value
+ attribute of the selected element.&lt;br&gt;
+ &lt;br&gt;
+ Select list keywords work on both lists and combo boxes. Key attributes
+ for select lists are id and name. See `Introduction` for details about
+ locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the select list.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The list of select list values&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get Selenium Implicit Wait">
+<arguments>
+</arguments>
+<doc>Returns the implicit wait time in seconds that is used by Selenium.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The implicit wait time in seconds.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Set Selenium Implicit Wait`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get Selenium Speed">
+<arguments>
+</arguments>
+<doc>&lt;b&gt;(NOT IMPLEMENTED)&lt;/b&gt; Returns the delay in seconds that is waited
+ after each Selenium command.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The delay in seconds.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Set Selenium Speed`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get Selenium Timeout">
+<arguments>
+</arguments>
+<doc>Returns the timeout in seconds that is used by various keywords.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The timeout in seconds.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Set Selenium Timeout`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get Source">
+<arguments>
+</arguments>
+<doc>Returns the entire HTML source of the current page or frame.&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The HTML source.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Log Source`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get System Info">
+<arguments>
+</arguments>
+<doc>Returns basic system information about the execution environment.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;System information.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Log System Info`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get Table Cell">
+<arguments>
+<arg>tableLocator</arg>
+<arg>row</arg>
+<arg>column</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Returns the content of the table cell at the coordinates &lt;b&gt;row&lt;/b&gt; and
+ &lt;b&gt;column&lt;/b&gt; of the table identified by &lt;b&gt;tableLocator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Row and column number start from 1. Header and footer rows are included
+ in the count. That way also cell content from header or footer rows can
+ be obtained with this keyword.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for tables are id and name. See `Introduction` for details
+ about locators and log levels.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;tableLocator&lt;/b&gt;&amp;nbsp;The locator to locate the table.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;row&lt;/b&gt;&amp;nbsp;The table row.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;column&lt;/b&gt;&amp;nbsp;The table column.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The table cell content.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get Text">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Returns the text of the element identified by &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The text of the element.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get Title">
+<arguments>
+</arguments>
+<doc>Returns the title of current page.&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The title.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Log Title`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get Value">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Returns the value attribute of the element identified by &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The value attribute of the element.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get Vertical Position">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Returns vertical position of element identified by &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ The position is returned in pixels off the top of the page, as an
+ integer. Fails if the matching element is not found.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The vertical position&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get Window Identifiers">
+<arguments>
+</arguments>
+<doc>Returns the id attributes of all windows known to the current browser
+ instance.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;List of window id attributes&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Log Window Identifiers`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get Window Names">
+<arguments>
+</arguments>
+<doc>Returns the names of all windows known to the current browser instance.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;List of window names&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Log Window Names`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Get Window Titles">
+<arguments>
+</arguments>
+<doc>Returns the titles of all windows known to the current browser instance.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;List of window titles&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Log Window Titles`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Go Back">
+<arguments>
+</arguments>
+<doc>Simulates the user clicking the "back" button on their browser.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Go To">
+<arguments>
+<arg>url</arg>
+</arguments>
+<doc>Navigates the active browser instance to the provided URL.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;url&lt;/b&gt;&amp;nbsp;The URL to open.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Input Password">
+<arguments>
+<arg>locator</arg>
+<arg>text</arg>
+</arguments>
+<doc>Types the given &lt;b&gt;text&lt;/b&gt; into the password field identified by
+ &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for input fields are id and name. See `Introduction` for
+ details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the password field.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The password to input&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Input Text">
+<arguments>
+<arg>locator</arg>
+<arg>text</arg>
+</arguments>
+<doc>Types the given &lt;b&gt;text&lt;/b&gt; into the text field identified by
+ &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for input fields are id and name. See `Introduction` for
+ details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the text field.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The password to input&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="List Selection Should Be">
+<arguments>
+<arg>locator</arg>
+<arg>*items</arg>
+</arguments>
+<doc>Verify the selection of the select list identified by &lt;b&gt;locator&lt;/b&gt;is
+ exactly &lt;b&gt;*items&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ If you want to verify no option is selected, simply give no items.&lt;br&gt;
+ &lt;br&gt;
+ Select list keywords work on both lists and combo boxes. Key attributes
+ for select lists are id and name. See `Introduction` for details about
+ locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the select list.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;items&lt;/b&gt;&amp;nbsp;The list of items to verify&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="List Should Have No Selections">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Verify the select list identified by &lt;b&gt;locator&lt;/b&gt;has no selections.&lt;br&gt;
+ &lt;br&gt;
+ Select list keywords work on both lists and combo boxes. Key attributes
+ for select lists are id and name. See `Introduction` for details about
+ locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the select list.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Location Should Be">
+<arguments>
+<arg>url</arg>
+</arguments>
+<doc>Verify the current page URL is exactly &lt;b&gt;url&lt;/b&gt;.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;url&lt;/b&gt;&amp;nbsp;The URL to verify.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Location Should Contain`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Location Should Contain">
+<arguments>
+<arg>url</arg>
+</arguments>
+<doc>Verify the current page URL contains &lt;b&gt;url&lt;/b&gt;.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;url&lt;/b&gt;&amp;nbsp;The URL to verify.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Location Should Be`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Log Location">
+<arguments>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Logs and returns the location of the current browser instance.&lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about the &lt;b&gt;logLevel&lt;/b&gt;.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The current location.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Get Location`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Log Remote Capabilities">
+<arguments>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Logs and returns the actually supported capabilities of the remote
+ browser instance.&lt;br&gt;
+ &lt;br&gt;
+ Not all server implementations will support every WebDriver feature.
+ Therefore, the client and server should use JSON objects with the
+ properties listed below when describing which features a user requests
+ that a session support. &lt;b&gt;If a session cannot support a capability that
+ is requested in the desired capabilities, no error is thrown;&lt;/b&gt; a
+ read-only capabilities object is returned that indicates the capabilities
+ the session actually supports. For more information see: &lt;a href=
+ "http://code.google.com/p/selenium/wiki/DesiredCapabilities"
+ &gt;DesiredCapabilities&lt;/a&gt;&lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about the &lt;b&gt;logLevel&lt;/b&gt;.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The capabilities of the remote node.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Get Remote Capabilities`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Log Remote Session Id">
+<arguments>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Logs and returns the session id of the remote browser instance.&lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about the &lt;b&gt;logLevel&lt;/b&gt;.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The remote session id.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Get Remote Session Id`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Log Source">
+<arguments>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Logs and returns the entire html source of the current page or frame.&lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about the &lt;b&gt;logLevel&lt;/b&gt;.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The entire html source.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Get Source`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Log System Info">
+<arguments>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Logs and returns basic system information about the execution
+ environment.&lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about the &lt;b&gt;logLevel&lt;/b&gt;.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;System information.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Get System Info`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Log Title">
+<arguments>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Logs and returns the title of current page.&lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about the &lt;b&gt;logLevel&lt;/b&gt;.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The page title.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Get Source`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Log Window Identifiers">
+<arguments>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Logs and returns the id attributes of all windows known to the current
+ browser instance.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;List of window id attributes.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Get Window Identifiers`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Log Window Names">
+<arguments>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Logs and returns the names of all windows known to the current browser
+ instance.&lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about the &lt;b&gt;logLevel&lt;/b&gt;.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;List of windows names.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Get Window Names`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Log Window Titles">
+<arguments>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Logs and returns the titles of all windows known to the current browser
+ instance.&lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about the &lt;b&gt;logLevel&lt;/b&gt;.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;List of window titles.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Get Window Titles`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Maximize Browser Window">
+<arguments>
+</arguments>
+<doc>Maximizes current browser window.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Mouse Down">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Simulates pressing the left mouse button on the element identified by
+ &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ The element is pressed without releasing the mouse button.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Mouse Down On Image`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Mouse Down On Link`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Mouse Down On Image">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Simulates pressing the left mouse button on the image identified by
+ &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ The element is pressed without releasing the mouse button.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for images are id, src and alt. See `Introduction` for
+ details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Mouse Down`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Mouse Down On Link`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Mouse Down On Link">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Simulates pressing the left mouse button on the link identified by
+ &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ The element is pressed without releasing the mouse button.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for links are id, name, href and link text. See
+ `Introduction` for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Mouse Down`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Mouse Down On Image`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Mouse Out">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Simulates moving the mouse away from the element identified by
+ &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Mouse Over">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Simulates moving the mouse over the element identified by &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Mouse Up">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Simulates releasing the left mouse button on the element identified by
+ &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Open Browser">
+<arguments>
+<arg>url</arg>
+<arg>browserName=firefox</arg>
+<arg>alias=NONE</arg>
+<arg>remoteUrl=False</arg>
+<arg>desiredCapabilities=NONE</arg>
+<arg>browserOptions=NONE</arg>
+</arguments>
+<doc>Opens a new browser instance to given URL.&lt;br&gt;
+ &lt;br&gt;
+ Possible values for browser are as follows:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;firefox&lt;/td&gt;
+ &lt;td&gt;FireFox&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;ff&lt;/td&gt;
+ &lt;td&gt;FireFox&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;internetexplorer&lt;/td&gt;
+ &lt;td&gt;Internet Explorer&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;ie&lt;/td&gt;
+ &lt;td&gt;Internet Explorer&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;googlechrome&lt;/td&gt;
+ &lt;td&gt;Google Chrome&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;gc&lt;/td&gt;
+ &lt;td&gt;Google Chrome&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;chrome&lt;/td&gt;
+ &lt;td&gt;Google Chrome&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;opera&lt;/td&gt;
+ &lt;td&gt;Opera&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;phantomjs&lt;/td&gt;
+ &lt;td&gt;PhantomJS&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;htmlunitwithjs&lt;/td&gt;
+ &lt;td&gt;HTMLUnit with Javascipt support&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;safari&lt;/td&gt;
+ &lt;td&gt;Safari&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;ipad&lt;/td&gt;
+ &lt;td&gt;iPad&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;iphone&lt;/td&gt;
+ &lt;td&gt;iPhone&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;android&lt;/td&gt;
+ &lt;td&gt;Android&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;htmlunit&lt;/td&gt;
+ &lt;td&gt;HTMLUnit&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;br&gt;
+ Returns the index of the newly created browser instance which can be used
+ later to switch back to it. Index starts from 1 and is reset back to it
+ when the `Close All Browsers` keyword is used.&lt;br&gt;
+ &lt;br&gt;
+ &lt;b&gt;DesiredCapabilities&lt;/b&gt;&lt;br&gt;
+ The DesiredCapabilities can be specified in a simple key:value format or
+ as a JSON object. With the JSON format more complex parameters, like the
+ proxy, can be configured.&lt;br&gt;
+ &lt;br&gt;
+ Example of desiredCapabilities as simple string:&lt;br&gt;
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;platform:Windows 8,browserName:firefox,version:25&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;br&gt;
+ Example of desiredCapabilities as JSON object:&lt;br&gt;
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;
+ {&lt;br&gt;
+ &amp;emsp;"platform":"Windows 8",&lt;br&gt;
+ &amp;emsp;"browserName":"firefox",&lt;br&gt;
+ &amp;emsp;"version":"25",&lt;br&gt;
+ &amp;emsp;"proxy":&lt;br&gt;
+ &amp;emsp;{&lt;br&gt;
+ &amp;emsp;&amp;emsp;"proxyType":"manual",&lt;br&gt;
+ &amp;emsp;&amp;emsp;"httpProxy":"localhost:8118"&lt;br&gt;
+ &amp;emsp;}&lt;br&gt;
+ }&lt;br&gt;
+ &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;br&gt;
+ &lt;b&gt;BrowserOptions&lt;/b&gt;&lt;br&gt;
+ The BrowserOptions can be specified as JSON object to set more complex
+ browser specific parameters. At the moment only the following browsers
+ with the listed options are implemented.&lt;br&gt;
+ &lt;br&gt;
+ Firefox:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;
+ {&lt;br&gt;
+ &amp;emsp;"preferences":&lt;br&gt;
+ &amp;emsp;{&lt;br&gt;
+ &amp;emsp;&amp;emsp;"extensions.firebug.currentVersion":"1.8.1",&lt;br&gt;
+ &amp;emsp;&amp;emsp;"extensions.firebug.addonBarOpened":true,&lt;br&gt;
+ &amp;emsp;&amp;emsp;"extensions.firebug.enableSites":true&lt;br&gt;
+ &amp;emsp;}&lt;br&gt;
+ &amp;emsp;"extensions":&lt;br&gt;
+ &amp;emsp;[&lt;br&gt;
+ &amp;emsp;&amp;emsp;"firebug-1.8.1.xpi",&lt;br&gt;
+ &amp;emsp;&amp;emsp;"modify_headers-0.7.1.1-fx.xpi"&lt;br&gt;
+ &amp;emsp;]&lt;br&gt;
+ }&lt;br&gt;
+ &lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;br&gt;
+ &lt;b&gt;Internet Explorer&lt;/b&gt;&lt;br&gt;
+ Note, that you will encounter strange behavior, if you open multiple
+ Internet Explorer browser instances. That is also why `Switch Browser`
+ only works with one IE browser at most. For more information see: &lt;a
+ href=
+ "http://selenium-grid.seleniumhq.org/faq.html#i_get_some_strange_errors_when_i_run_multiple_internet_explorer_instances_on_the_same_machine"
+ &gt;Strange errors with multiple IE instances&lt;/a&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;url&lt;/b&gt;&amp;nbsp;The URL to open in the newly created browser instance.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;browserName&lt;/b&gt;&amp;nbsp;Default=firefox. Optional name of the browser to start.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;alias&lt;/b&gt;&amp;nbsp;Default=NONE. Optional alias for the newly created browser
+            instance. The alias can be used later for switching between
+            browsers instances, just as returned index.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;remoteUrl&lt;/b&gt;&amp;nbsp;Default=False. Optional remote grid URL. When specified no
+            local WebDriver instance is created, but a network connection
+            to a Selenium 2 WebDriver Grid Hub at the given URL is opened.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;desiredCapabilities&lt;/b&gt;&amp;nbsp;Default=NONE. Optional desired capabilities of the newly
+            created remote browser instances can be specified in a simple
+            key1:val1,key2:val2 format or as a JSON object (see examples
+            above). Used to communicate to the remote grid, which kind of
+            browser, etc. should be used. For more information see: &lt;a
+            href=
+            "http://code.google.com/p/selenium/wiki/DesiredCapabilities"
+            &gt;DesiredCapabilities&lt;/a&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;browserOptions&lt;/b&gt;&amp;nbsp;Default=NONE. Extended browser options as JSON structure.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The index of the newly created browser instance.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Close All Browsers`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Close Browser`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Switch Browser`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Open Context Menu">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Opens the context menu on the element identified by &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Page Should Contain">
+<arguments>
+<arg>text</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the current page contains &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about log levels.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Page Should Contain Button">
+<arguments>
+<arg>locator</arg>
+<arg>message=NONE</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the button identified by &lt;b&gt;locator&lt;/b&gt; is found on the current
+ page.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for buttons are id, name and value. See `Introduction` for
+ details about log levels and locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the button.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Page Should Contain Checkbox">
+<arguments>
+<arg>locator</arg>
+<arg>message=NONE</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the checkbox identified by &lt;b&gt;locator&lt;/b&gt; is found on the current
+ page.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for checkboxes are id and name. See `Introduction` for
+ details about log levels and locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the checkbox.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Page Should Contain Element">
+<arguments>
+<arg>locator</arg>
+<arg>message=NONE</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the element identified by &lt;b&gt;locator&lt;/b&gt; is found on the current
+ page.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about log levels and locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Page Should Contain Image">
+<arguments>
+<arg>locator</arg>
+<arg>message=NONE</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the image identified by &lt;b&gt;locator&lt;/b&gt; is found on the current
+ page.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for images are id, src and alt. See `Introduction` for
+ details about log levels and locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the link.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Page Should Contain Link">
+<arguments>
+<arg>locator</arg>
+<arg>message=NONE</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the link identified by &lt;b&gt;locator&lt;/b&gt; is found on the current
+ page.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for links are id, name, href and link text. See
+ `Introduction` for details about log levels and locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the link.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Page Should Contain List">
+<arguments>
+<arg>locator</arg>
+<arg>message=NONE</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the select list identified by &lt;b&gt;locator&lt;/b&gt; is found on the
+ current page.&lt;br&gt;
+ &lt;br&gt;
+ Select list keywords work on both lists and combo boxes. Key attributes
+ for select lists are id and name. See `Introduction` for details about
+ locators and log levels.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the select list.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Page Should Contain Radio Button">
+<arguments>
+<arg>locator</arg>
+<arg>message=NONE</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the radio button identified by &lt;b&gt;locator&lt;/b&gt; is found on the
+ current page.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for radio buttons are id and name. See `Introduction` for
+ details about log levels and locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the radio button.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Page Should Contain Textfield">
+<arguments>
+<arg>locator</arg>
+<arg>message=NONE</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the text field identified by &lt;b&gt;locator&lt;/b&gt; is found on the
+ current page.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for text field are id and name. See `Introduction` for
+ details about log levels and locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the text field.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Page Should Not Contain">
+<arguments>
+<arg>text</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the current page does not contain &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about log levels.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Page Should Not Contain Button">
+<arguments>
+<arg>locator</arg>
+<arg>message=NONE</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the button identified by &lt;b&gt;locator&lt;/b&gt; is not found on the
+ current page.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for buttons are id, name and value. See `Introduction` for
+ details about log levels and locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the button.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Page Should Not Contain Checkbox">
+<arguments>
+<arg>locator</arg>
+<arg>message=NONE</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the checkbox identified by &lt;b&gt;locator&lt;/b&gt; is not found on the
+ current page.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for checkboxes are id and name. See `Introduction` for
+ details about log levels and locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the checkbox.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Page Should Not Contain Element">
+<arguments>
+<arg>locator</arg>
+<arg>message=NONE</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the element identified by &lt;b&gt;locator&lt;/b&gt; is not found on the
+ current page.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about log levels and locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Page Should Not Contain Image">
+<arguments>
+<arg>locator</arg>
+<arg>message=NONE</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the image identified by &lt;b&gt;locator&lt;/b&gt; is not found on the current
+ page.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for images are id, src and alt. See `Introduction` for
+ details about log levels and locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the link.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Page Should Not Contain Link">
+<arguments>
+<arg>locator</arg>
+<arg>message=NONE</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the link identified by &lt;b&gt;locator&lt;/b&gt; is not found on the current
+ page.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for links are id, name, href and link text. See
+ `Introduction` for details about log levels and locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the link.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Page Should Not Contain List">
+<arguments>
+<arg>locator</arg>
+<arg>message=NONE</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the select list identified by &lt;b&gt;locator&lt;/b&gt; is not found on the
+ current page.&lt;br&gt;
+ &lt;br&gt;
+ Select list keywords work on both lists and combo boxes. Key attributes
+ for select lists are id and name. See `Introduction` for details about
+ locators and log levels.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the select list.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Page Should Not Contain Radio Button">
+<arguments>
+<arg>locator</arg>
+<arg>message=NONE</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the radio button identified by &lt;b&gt;locator&lt;/b&gt; is not found on the
+ current page.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for radio buttons are id and name. See `Introduction` for
+ details about log levels and locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the radio button.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Page Should Not Contain Textfield">
+<arguments>
+<arg>locator</arg>
+<arg>message=NONE</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the text field identified by &lt;b&gt;locator&lt;/b&gt; is not found on the
+ current page.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for text field are id and name. See `Introduction` for
+ details about log levels and locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the text field.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Press Key">
+<arguments>
+<arg>locator</arg>
+<arg>key</arg>
+</arguments>
+<doc>Simulates pressing &lt;b&gt;key&lt;/b&gt; on the element identified by
+ &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key is either a single character, or a numerical ASCII code of the key
+ lead by '\\'.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;
+ &lt;br&gt;
+ Example:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Press Key&lt;/td&gt;
+ &lt;td&gt;text_field&lt;/td&gt;
+ &lt;td&gt;q&lt;/td&gt;
+ &lt;td&gt;# Press 'q'&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Press Key&lt;/td&gt;
+ &lt;td&gt;login_button&lt;/td&gt;
+ &lt;td&gt;\\13&lt;/td&gt;
+ &lt;td&gt;# ASCII code for enter key&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;key&lt;/b&gt;&amp;nbsp;The key to press.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Radio Button Should Be Set To">
+<arguments>
+<arg>groupName</arg>
+<arg>value</arg>
+</arguments>
+<doc>Verify the radio button group identified by &lt;b&gt;groupName&lt;/b&gt; has its
+ selection set to &lt;b&gt;value&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ See `Select Radio Button` for details about locating radio buttons.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;groupName&lt;/b&gt;&amp;nbsp;The radio button group name.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;value&lt;/b&gt;&amp;nbsp;The expected value.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Radio Button Should Not Be Selected">
+<arguments>
+<arg>groupName</arg>
+</arguments>
+<doc>Verify the radio button group identified by &lt;b&gt;groupName&lt;/b&gt; has no
+ selection.&lt;br&gt;
+ &lt;br&gt;
+ See `Select Radio Button` for details about locating radio buttons.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;groupName&lt;/b&gt;&amp;nbsp;The radio button group name.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Register Keyword To Run On Failure">
+<arguments>
+<arg>keyword</arg>
+</arguments>
+<doc>Sets the actual and returns the previous keyword to execute when a
+ Selenium2Library keyword fails.&lt;br&gt;
+ &lt;br&gt;
+ The &lt;b&gt;keyword&lt;/b&gt; is the name of a keyword (from any available
+ libraries) that will be executed, if a Selenium2Library keyword fails. It
+ is not possible to use a keyword that requires arguments. Using the value
+ &lt;b&gt;Nothing&lt;/b&gt; will disable this feature altogether.&lt;br&gt;
+ &lt;br&gt;
+ The initial keyword to use is set at importing the library and the
+ keyword that is used by default is `Capture Page Screenshot`. Taking a
+ screenshot when something failed is a very useful feature, but notice
+ that it can slow down the execution.&lt;br&gt;
+ &lt;br&gt;
+ This keyword returns the name of the previously registered failure
+ keyword. It can be used to restore the original value later.&lt;br&gt;
+ &lt;br&gt;
+ Example:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Register Keyword To Run On Failure&lt;/td&gt;
+ &lt;td&gt;Log Source&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;# Run `Log Source` on failure.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;${previous kw}=&lt;/td&gt;
+ &lt;td&gt;Register Keyword To Run On Failure&lt;/td&gt;
+ &lt;td&gt;Nothing&lt;/td&gt;
+ &lt;td&gt;# Disable run-on-failure functionality and stors the previous kw name
+ in a variable.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Register Keyword To Run On Failure&lt;/td&gt;
+ &lt;td&gt;${previous kw}&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;# Restore to the previous keyword.&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;keyword&lt;/b&gt;&amp;nbsp;The keyword to execute on failure&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The previous keyword&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Reload Page">
+<arguments>
+</arguments>
+<doc>Simulates user reloading page.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Select All From List">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Select all values of the multi-select list identified by &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Select list keywords work on both lists and combo boxes. Key attributes
+ for select lists are id and name. See `Introduction` for details about
+ locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the multi-select list.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Select Checkbox">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Select the checkbox identified by &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Does nothing, if the checkbox is already selected.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for checkboxes are id and name. See `Introduction` for
+ details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the checkbox.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Select Frame">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Selects the frame identified by &lt;b&gt;locator&lt;/b&gt; as current frame.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for frames are &lt;b&gt;id&lt;/b&gt; and &lt;b&gt;name&lt;/b&gt;. See
+ `Introduction` for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the frame&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Select From List">
+<arguments>
+<arg>locator</arg>
+<arg>*items</arg>
+</arguments>
+<doc>Select the given &lt;b&gt;*items&lt;/b&gt; of the multi-select list identified by
+ &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ An exception is raised for a single-selection list if the last value does
+ not exist in the list and a warning for all other non-existing items. For
+ a multi-selection list, an exception is raised for any and all
+ non-existing values.&lt;br&gt;
+ &lt;br&gt;
+ Select list keywords work on both lists and combo boxes. Key attributes
+ for select lists are id and name. See `Introduction` for details about
+ locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the multi-select list.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;items&lt;/b&gt;&amp;nbsp;The list of items to select&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Select From List By Index">
+<arguments>
+<arg>locator</arg>
+<arg>*indexes</arg>
+</arguments>
+<doc>Select the given &lt;b&gt;*indexes&lt;/b&gt; of the multi-select list identified by
+ &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Tries to select by value AND by label. It's generally faster to use 'by
+ index/value/label' keywords.&lt;br&gt;
+ &lt;br&gt;
+ Select list keywords work on both lists and combo boxes. Key attributes
+ for select lists are id and name. See `Introduction` for details about
+ locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the multi-select list.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;indexes&lt;/b&gt;&amp;nbsp;The list of indexes to select&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Select From List By Label">
+<arguments>
+<arg>locator</arg>
+<arg>*labels</arg>
+</arguments>
+<doc>Select the given &lt;b&gt;*labels&lt;/b&gt; of the multi-select list identified by
+ &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Select list keywords work on both lists and combo boxes. Key attributes
+ for select lists are id and name. See `Introduction` for details about
+ locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the multi-select list.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;labels&lt;/b&gt;&amp;nbsp;The list of labels to select&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Select From List By Value">
+<arguments>
+<arg>locator</arg>
+<arg>*values</arg>
+</arguments>
+<doc>Select the given &lt;b&gt;*values&lt;/b&gt; of the multi-select list identified by
+ &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Select list keywords work on both lists and combo boxes. Key attributes
+ for select lists are id and name. See `Introduction` for details about
+ locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the multi-select list.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;values&lt;/b&gt;&amp;nbsp;The list of values to select&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Select Radio Button">
+<arguments>
+<arg>groupName</arg>
+<arg>value</arg>
+</arguments>
+<doc>Sets the selection of the radio button group identified by
+ &lt;b&gt;groupName&lt;/b&gt; to &lt;b&gt;value&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Example:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Select Radio Button&lt;/td&gt;
+ &lt;td&gt;size&lt;/td&gt;
+ &lt;td&gt;XL&lt;/td&gt;
+ &lt;td&gt;# Matches HTML like &amp;lt;input type="radio" name="size"
+ value="XL"&amp;gt;XL&amp;lt;/input&amp;gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Select Radio Button&lt;/td&gt;
+ &lt;td&gt;size&lt;/td&gt;
+ &lt;td&gt;sizeXL&lt;/td&gt;
+ &lt;td&gt;# Matches HTML like &amp;lt;input type="radio" name="size" value="XL"
+ id="sizeXL"&amp;gt;XL&amp;lt;/input&amp;gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;groupName&lt;/b&gt;&amp;nbsp;The radio button group name.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;value&lt;/b&gt;&amp;nbsp;The value or id attribute of the radio button to set.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Select Window">
+<arguments>
+<arg>locator=NONE</arg>
+</arguments>
+<doc>Selects the window identified by &lt;b&gt;locator&lt;/b&gt; as the context of
+ actions.&lt;br&gt;
+ &lt;br&gt;
+ If the window is found, all subsequent commands use that window, until
+ this keyword is used again. If the window is not found, this keyword
+ fails.&lt;br&gt;
+ &lt;br&gt;
+ By default, when a locator value is provided, it is matched against the
+ title of the window and the javascript name of the window. If multiple
+ windows with same identifier are found, the first one is selected.&lt;br&gt;
+ &lt;br&gt;
+ The special locator main (default) can be used to select the main window.&lt;br&gt;
+ &lt;br&gt;
+ Example:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Click Link&lt;/td&gt;
+ &lt;td&gt;popup_link&lt;/td&gt;
+ &lt;td&gt;# opens new window&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Select Window&lt;/td&gt;
+ &lt;td&gt;popupName&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Title Should Be&lt;/td&gt;
+ &lt;td&gt;Popup Title&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Select Window&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;# Chooses the main window again&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;br&gt;
+ It is also possible to specify the approach Selenium2Library should take
+ to find a window by specifying a locator strategy. See `Introduction` for
+ details about locators:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;b&gt;Strategy&lt;/b&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;b&gt;Example&lt;/b&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;b&gt;Description&lt;/b&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;title&lt;/td&gt;
+ &lt;td&gt;Select Window | title=My Document&lt;/td&gt;
+ &lt;td&gt;Matches by window title&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;name&lt;/td&gt;
+ &lt;td&gt;Select Window | name=${name}&lt;/td&gt;
+ &lt;td&gt;Matches by window javascript name&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;url&lt;/td&gt;
+ &lt;td&gt;Select Window | url=http://google.com&lt;/td&gt;
+ &lt;td&gt;Matches by window's current URL&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the window&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Set Browser Implicit Wait">
+<arguments>
+<arg>timestr</arg>
+</arguments>
+<doc>Sets and returns the implicit wait time in seconds that is used by the
+ current Selenium 2 WebDriver instance.&lt;br&gt;
+ &lt;br&gt;
+ From selenium 2 function: &lt;i&gt;Sets a sticky timeout to implicitly wait for
+ an element to be found, or a command to complete. This method only needs
+ to be called one time per session.&lt;/i&gt;&lt;br&gt;
+ &lt;br&gt;
+ Example:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;${orig wait} =&lt;/td&gt;
+ &lt;td&gt;Set Browser Implicit Wait&lt;/td&gt;
+ &lt;td&gt;10 seconds&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;# Perform AJAX call that is slow&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Set Browser Implicit Wait&lt;/td&gt;
+ &lt;td&gt;${orig wait}&lt;/td&gt;
+ &lt;td&gt;# Reset to old value&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;timestr&lt;/b&gt;&amp;nbsp;The implicit wait time in seconds.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The previous implicit wait time in seconds.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Set Selenium Implicit Wait`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Set Log Directory">
+<arguments>
+<arg>logDirectory</arg>
+</arguments>
+<doc>Set the &lt;b&gt;logDirectory&lt;/b&gt;, where captured screenshots are stored, to
+ some custom path.&lt;br&gt;
+ &lt;br&gt;
+ Fails, if either the given path does not exist, is no directory or is not
+ writable.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logDirectory&lt;/b&gt;&amp;nbsp;The directory to log to.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Set Remote Web Driver Proxy">
+<arguments>
+<arg>host</arg>
+<arg>port</arg>
+<arg>username=NONE</arg>
+<arg>password=NONE</arg>
+<arg>domain=NONE</arg>
+<arg>workstation=NONE</arg>
+</arguments>
+<doc>Configures proxy handling for remote WebDriver instances.&lt;br&gt;
+ &lt;br&gt;
+ This is needed to connect to an external Selenium 2 WebDriver rid through
+ a local HTTP proxy. This implementation handles BASIC, DIGEST and NTLM
+ based authentication schemes correctly.&lt;br&gt;
+ &lt;br&gt;
+ The given configuration will be used for all subsequent calls of `Open
+ Browser`. To remove the proxy call:&lt;br&gt;
+ Set Remote Web Driver Proxy | ${EMPTY} | ${EMPTY}&lt;br&gt;
+ &lt;br&gt;
+ Some additional info:
+ &lt;ul&gt;
+ &lt;li&gt;If no &lt;b&gt;username&lt;/b&gt; is provided, it looks for a username at the
+ Java property http.proxyUser and the environment variables HTTP_PROXY and
+ http_proxy. If a username is found, it is only used, if the host and port
+ also match.&lt;/li&gt;
+ &lt;li&gt;If no &lt;b&gt;password&lt;/b&gt; is provided, it looks for a password at the
+ Java property http.proxyUser and the environment variables HTTP_PROXY and
+ http_proxy. If a password is found, it is only used, if the host, port
+ and username also match.&lt;/li&gt;
+ &lt;li&gt;If a &lt;b&gt;domain&lt;/b&gt; is provided, NTLM based authentication is used&lt;/li&gt;
+ &lt;li&gt;If no &lt;b&gt;workstation&lt;/b&gt; is provided and NTLM based authentication is
+ used, the hostname is used as workstation name.&lt;/li&gt;
+ &lt;/ul&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;host&lt;/b&gt;&amp;nbsp;The hostname of the proxy&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;port&lt;/b&gt;&amp;nbsp;The port of the proxy&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;username&lt;/b&gt;&amp;nbsp;Default=NONE. The usename&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;password&lt;/b&gt;&amp;nbsp;Default=NONE. The password of the user&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;domain&lt;/b&gt;&amp;nbsp;Default=NONE. The NTLM domain name&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;workstation&lt;/b&gt;&amp;nbsp;Default=NONE. The name of the workstation&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Set Selenium Implicit Wait">
+<arguments>
+<arg>timestr</arg>
+</arguments>
+<doc>Sets and returns the implicit wait time in seconds that is used by all
+ Selenium 2 WebDriver instances. This affects all currently open and from
+ now on opened instances.&lt;br&gt;
+ &lt;br&gt;
+ From selenium 2 function: &lt;i&gt;Sets a sticky timeout to implicitly wait for
+ an element to be found, or a command to complete. This method only needs
+ to be called one time per session.&lt;/i&gt;&lt;br&gt;
+ &lt;br&gt;
+ Example:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;${orig wait} =&lt;/td&gt;
+ &lt;td&gt;Set Selenium Implicit Wait&lt;/td&gt;
+ &lt;td&gt;10 seconds&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;# Perform AJAX call that is slow&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Set Selenium Implicit Wait&lt;/td&gt;
+ &lt;td&gt;${orig wait}&lt;/td&gt;
+ &lt;td&gt;# Reset to old value&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;timestr&lt;/b&gt;&amp;nbsp;The implicit wait time in seconds.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The previous implicit wait time in seconds.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Set Browser Implicit Wait`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Get Selenium Implicit Wait`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Set Selenium Speed">
+<arguments>
+<arg>timestr</arg>
+</arguments>
+<doc>&lt;b&gt;(NOT IMPLEMENTED)&lt;/b&gt; Sets and returns the delay in seconds that is
+ waited after each Selenium command.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;timestr&lt;/b&gt;&amp;nbsp;The delay in seconds.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The previous delay in seconds.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Get Selenium Speed`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Set Selenium Timeout">
+<arguments>
+<arg>timestr</arg>
+</arguments>
+<doc>Sets and returns the timeout in seconds that is used by various keywords.&lt;br&gt;
+ &lt;br&gt;
+ There are several Wait ... keywords that take a timeout as an argument.
+ All of these timeout arguments are optional. The timeout used by all of
+ them can be set globally using this keyword. See `Introduction` for more
+ information about timeouts.&lt;br&gt;
+ &lt;br&gt;
+ The previous timeout value is returned by this keyword and can be used to
+ set the old value back later. The default timeout is 5 seconds, but it
+ can be altered in importing the library.&lt;br&gt;
+ &lt;br&gt;
+ Example:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;${orig timeout} =&lt;/td&gt;
+ &lt;td&gt;Set Selenium Timeout&lt;/td&gt;
+ &lt;td&gt;15 seconds&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;# Open page that loads slowly&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Set Selenium Timeout&lt;/td&gt;
+ &lt;td&gt;${orig timeout}&lt;/td&gt;
+ &lt;td&gt;# Reset to old value&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;timestr&lt;/b&gt;&amp;nbsp;The timeout in seconds.&lt;br&gt;&lt;br&gt;&lt;b&gt;Returns:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;The previous timeout in seconds.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Get Selenium Timeout`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Set Window Size">
+<arguments>
+<arg>width</arg>
+<arg>height</arg>
+</arguments>
+<doc>Sets the &lt;b&gt;width&lt;/b&gt; and &lt;b&gt;height&lt;/b&gt; of the current window to the
+ specified values.&lt;br&gt;
+ &lt;br&gt;
+ Example:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Set Window Size&lt;/td&gt;
+ &lt;td&gt;800&lt;/td&gt;
+ &lt;td&gt;600&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;${width}&lt;/td&gt;
+ &lt;td&gt;${height}=&lt;/td&gt;
+ &lt;td&gt;Get Window Size&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Should Be Equal&lt;/td&gt;
+ &lt;td&gt;${width}&lt;/td&gt;
+ &lt;td&gt;800&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Should Be Equal&lt;/td&gt;
+ &lt;td&gt;${height}&lt;/td&gt;
+ &lt;td&gt;600&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;width&lt;/b&gt;&amp;nbsp;The window width to set in px.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;height&lt;/b&gt;&amp;nbsp;The window height to set in px.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Simulate">
+<arguments>
+<arg>locator</arg>
+<arg>event</arg>
+</arguments>
+<doc>Simulates the given &lt;b&gt;event&lt;/b&gt; on the element identified by
+ &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ This keyword is especially useful, when the element has an OnEvent
+ handler that needs to be explicitly invoked.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for arbitrary elements are id and name. See `Introduction`
+ for details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;event&lt;/b&gt;&amp;nbsp;The event to invoke.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Submit Form">
+<arguments>
+<arg>locator=NONE</arg>
+</arguments>
+<doc>Submit the form identified by &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ If the locator is empty, the first form in the page will be submitted.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for forms are id and name. See `Introduction` for details
+ about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;Default=NONE. The locator to locate the form.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Switch Browser">
+<arguments>
+<arg>indexOrAlias</arg>
+</arguments>
+<doc>"Switches between active browser instances using an &lt;b&gt;index&lt;/b&gt; or an
+ &lt;b&gt;alias&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ The index is returned from `Open Browser` and an alias can be given to
+ it.&lt;br&gt;
+ &lt;br&gt;
+ Example:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Open Browser&lt;/td&gt;
+ &lt;td&gt;http://google.com&lt;/td&gt;
+ &lt;td&gt;ff&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Location Should Be&lt;/td&gt;
+ &lt;td&gt;http://google.com&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Open Browser&lt;/td&gt;
+ &lt;td&gt;http://yahoo.com&lt;/td&gt;
+ &lt;td&gt;ie&lt;/td&gt;
+ &lt;td&gt;2nd conn&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Location Should Be&lt;/td&gt;
+ &lt;td&gt;http://yahoo.com&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Switch Browser&lt;/td&gt;
+ &lt;td&gt;1&lt;/td&gt;
+ &lt;td&gt;# index&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Page Should Contain&lt;/td&gt;
+ &lt;td&gt;I'm feeling lucky&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Switch Browser&lt;/td&gt;
+ &lt;td&gt;2nd conn&lt;/td&gt;
+ &lt;td&gt;# alias&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Page Should Contain&lt;/td&gt;
+ &lt;td&gt;More Yahoo!&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Close All Browsers&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;br&gt;
+ The above example expects that there was no other open browsers when
+ opening the first one because it used index '1' when switching to it
+ later. If you aren't sure about that you can store the index into a
+ variable as below.
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;${id} =&lt;/td&gt;
+ &lt;td&gt;Open Browser&lt;/td&gt;
+ &lt;td&gt;http://google.com&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;# Do something ...&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Switch Browser&lt;/td&gt;
+ &lt;td&gt;${id}&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;indexOrAlias&lt;/b&gt;&amp;nbsp;the index or alias of the browser instance to switch to&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Close All Browsers`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Close Browser`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Open Browser`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Table Cell Should Contain">
+<arguments>
+<arg>tableLocator</arg>
+<arg>row</arg>
+<arg>column</arg>
+<arg>text</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the content of the table cell at the coordinates &lt;b&gt;row&lt;/b&gt; and
+ &lt;b&gt;column&lt;/b&gt; of the table identified by &lt;b&gt;tableLocator&lt;/b&gt; contains
+ &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Row and column number start from 1. Header and footer rows are included
+ in the count. That way also cell content from header or footer rows can
+ be obtained with this keyword.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for tables are id and name. See `Introduction` for details
+ about locators and log levels.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;tableLocator&lt;/b&gt;&amp;nbsp;The locator to locate the table.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;row&lt;/b&gt;&amp;nbsp;The table row.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;column&lt;/b&gt;&amp;nbsp;The table column.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Table Column Should Contain">
+<arguments>
+<arg>tableLocator</arg>
+<arg>col</arg>
+<arg>text</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the content of any table cells of the table &lt;b&gt;column&lt;/b&gt; of the
+ table identified by &lt;b&gt;tableLocator&lt;/b&gt; contains &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for tables are id and name. See `Introduction` for details
+ about locators and log levels.&lt;br&gt;
+ &lt;br&gt;
+ The first leftmost column is column number 1. If the table contains cells
+ that span multiple columns, those merged cells count as a single column.
+ For example both tests below work, if in one row columns A and B are
+ merged with colspan="2", and the logical third column contains "C".&lt;br&gt;
+ &lt;br&gt;
+ Example:
+ &lt;table border="1" cellspacing="0" summary=""&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Table Column Should Contain&lt;/td&gt;
+ &lt;td&gt;tableId&lt;/td&gt;
+ &lt;td&gt;3&lt;/td&gt;
+ &lt;td&gt;C&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Table Column Should Contain&lt;/td&gt;
+ &lt;td&gt;tableId&lt;/td&gt;
+ &lt;td&gt;2&lt;/td&gt;
+ &lt;td&gt;C&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/table&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;tableLocator&lt;/b&gt;&amp;nbsp;The locator to locate the table.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;col&lt;/b&gt;&amp;nbsp;The table column.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Table Footer Should Contain">
+<arguments>
+<arg>tableLocator</arg>
+<arg>text</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the content of any table footer cells of the table identified by
+ &lt;b&gt;tableLocator&lt;/b&gt; contains &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for tables are id and name. See `Introduction` for details
+ about locators and log levels.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;tableLocator&lt;/b&gt;&amp;nbsp;The locator to locate the table.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Table Header Should Contain">
+<arguments>
+<arg>tableLocator</arg>
+<arg>text</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the content of any table header cells of the table identified by
+ &lt;b&gt;tableLocator&lt;/b&gt; contains &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for tables are id and name. See `Introduction` for details
+ about locators and log levels.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;tableLocator&lt;/b&gt;&amp;nbsp;The locator to locate the table.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Table Row Should Contain">
+<arguments>
+<arg>tableLocator</arg>
+<arg>row</arg>
+<arg>text</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the content of any table cells of the table &lt;b&gt;row&lt;/b&gt; of the
+ table identified by &lt;b&gt;tableLocator&lt;/b&gt; contains &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for tables are id and name. See `Introduction` for details
+ about locators and log levels.&lt;br&gt;
+ &lt;br&gt;
+ The uppermost row is row number 1. For tables that are structured with
+ thead, tbody and tfoot, only the tbody section is searched. Please use
+ Table Header Should Contain or Table Footer Should Contain for tests
+ against the header or footer content.&lt;br&gt;
+ &lt;br&gt;
+ If the table contains cells that span multiple rows, a match only occurs
+ for the uppermost row of those merged cells.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;tableLocator&lt;/b&gt;&amp;nbsp;The locator to locate the table.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;row&lt;/b&gt;&amp;nbsp;The table row.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Table Should Contain">
+<arguments>
+<arg>tableLocator</arg>
+<arg>text</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify the content of any table cells of the table identified by
+ &lt;b&gt;tableLocator&lt;/b&gt; contains &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for tables are id and name. See `Introduction` for details
+ about locators and log levels.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;tableLocator&lt;/b&gt;&amp;nbsp;The locator to locate the table.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Textarea Should Contain">
+<arguments>
+<arg>locator</arg>
+<arg>text</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Verify the text area identified by &lt;b&gt;locator&lt;/b&gt; contains &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for text areas are id and name. See `Introduction` for
+ details about log levels and locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the text area.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Textarea Should Not Contain`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Textarea Value Should Be`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Textarea Value Should Not Be`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Textarea Should Not Contain">
+<arguments>
+<arg>locator</arg>
+<arg>text</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Verify the text area identified by &lt;b&gt;locator&lt;/b&gt; does not contain &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for text areas are id and name. See `Introduction` for
+ details about log levels and locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the text area.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Textarea Should Contain`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Textarea Value Should Be`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Textarea Value Should Not Be`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Textarea Value Should Be">
+<arguments>
+<arg>locator</arg>
+<arg>text</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Verify the text area identified by &lt;b&gt;locator&lt;/b&gt; is exactly
+ &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for text area are id and name. See `Introduction` for
+ details about log levels and locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the text area.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Textarea Should Contain`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Textarea Should Not Contain`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Textarea Value Should Not Be`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Textarea Value Should Not Be">
+<arguments>
+<arg>locator</arg>
+<arg>text</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Verify the text area identified by &lt;b&gt;locator&lt;/b&gt; is not exactly
+ &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for text area are id and name. See `Introduction` for
+ details about log levels and locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the text area.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Textarea Should Contain`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Textarea Should Not Contain`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Textarea Value Should Be`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Textfield Should Contain">
+<arguments>
+<arg>locator</arg>
+<arg>text</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Verify the text field identified by &lt;b&gt;locator&lt;/b&gt; contains &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for text field are id and name. See `Introduction` for
+ details about log levels and locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the text field.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Textfield Should Not Contain`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Textfield Value Should Be`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Textfield Value Should Not Be`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Textfield Should Not Contain">
+<arguments>
+<arg>locator</arg>
+<arg>text</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Verify the text field identified by &lt;b&gt;locator&lt;/b&gt; does not contain
+ &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for text field are id and name. See `Introduction` for
+ details about log levels and locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the text field.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Textfield Should Contain`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Textfield Value Should Be`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Textfield Value Should Not Be`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Textfield Value Should Be">
+<arguments>
+<arg>locator</arg>
+<arg>text</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Verify the text field identified by &lt;b&gt;locator&lt;/b&gt; is exactly
+ &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for text field are id and name. See `Introduction` for
+ details about log levels and locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the text field.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Textfield Should Contain`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Textfield Should Not Contain`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Textfield Value Should Not Be`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Textfield Value Should Not Be">
+<arguments>
+<arg>locator</arg>
+<arg>text</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Verify the text field identified by &lt;b&gt;locator&lt;/b&gt; is not exactly
+ &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for text field are id and name. See `Introduction` for
+ details about log levels and locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the text field.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Textfield Should Contain`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Textfield Should Not Contain`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Textfield Value Should Be`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Title Should Be">
+<arguments>
+<arg>title</arg>
+</arguments>
+<doc>Verify the current page title is exactly &lt;b&gt;title&lt;/b&gt;.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;title&lt;/b&gt;&amp;nbsp;The title to verify.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Title Should Not Be`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Title Should Contain`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Title Should Not Contain`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Title Should Contain">
+<arguments>
+<arg>title</arg>
+</arguments>
+<doc>Verify the current page title contains &lt;b&gt;title&lt;/b&gt;.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;title&lt;/b&gt;&amp;nbsp;The title to verify.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Title Should Be`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Title Should Not Be`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Title Should Not Contain`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Title Should Not Be">
+<arguments>
+<arg>title</arg>
+</arguments>
+<doc>Verify the current page title is not exactly &lt;b&gt;title&lt;/b&gt;.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;title&lt;/b&gt;&amp;nbsp;The title to verify.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Title Should Be`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Title Should Contain`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Title Should Not Contain`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Title Should Not Contain">
+<arguments>
+<arg>title</arg>
+</arguments>
+<doc>Verify the current page title does not contain &lt;b&gt;title&lt;/b&gt;.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;title&lt;/b&gt;&amp;nbsp;The title to verify.&lt;br&gt;&lt;br&gt;&lt;b&gt;See Also:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Title Should Be`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Title Should Not Be`&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;`Title Should Contain`&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Unselect Checkbox">
+<arguments>
+<arg>locator</arg>
+</arguments>
+<doc>Unselect the checkbox identified by &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Does nothing, if the checkbox is not selected.&lt;br&gt;
+ &lt;br&gt;
+ Key attributes for checkboxes are id and name. See `Introduction` for
+ details about locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the checkbox.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Unselect Frame">
+<arguments>
+</arguments>
+<doc>Selects the top frame as the current frame.</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Unselect From List">
+<arguments>
+<arg>locator</arg>
+<arg>*items</arg>
+</arguments>
+<doc>Unselect the given &lt;b&gt;*items&lt;/b&gt; of the multi-select list identified by
+ &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ As a special case, giving an empty *items list will remove all
+ selections.&lt;br&gt;
+ &lt;br&gt;
+ Tries to unselect by value AND by label. It's generally faster to use 'by
+ index/value/label' keywords.&lt;br&gt;
+ &lt;br&gt;
+ Select list keywords work on both lists and combo boxes. Key attributes
+ for select lists are id and name. See `Introduction` for details about
+ locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the multi-select list.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;items&lt;/b&gt;&amp;nbsp;The list of items to select&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Unselect From List By Index">
+<arguments>
+<arg>locator</arg>
+<arg>*indexes</arg>
+</arguments>
+<doc>Unselect the given &lt;b&gt;*indexes&lt;/b&gt; of the multi-select list identified by
+ &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Select list keywords work on both lists and combo boxes. Key attributes
+ for select lists are id and name. See `Introduction` for details about
+ locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the multi-select list.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;indexes&lt;/b&gt;&amp;nbsp;The list of indexes to select&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Unselect From List By Label">
+<arguments>
+<arg>locator</arg>
+<arg>*labels</arg>
+</arguments>
+<doc>Unselect the given &lt;b&gt;*labels&lt;/b&gt; of the multi-select list identified by
+ &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Select list keywords work on both lists and combo boxes. Key attributes
+ for select lists are id and name. See `Introduction` for details about
+ locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the multi-select list.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;labels&lt;/b&gt;&amp;nbsp;The list of labels to select&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Unselect From List By Value">
+<arguments>
+<arg>locator</arg>
+<arg>*values</arg>
+</arguments>
+<doc>Unselect the given &lt;b&gt;*values&lt;/b&gt; of the multi-select list identified by
+ &lt;b&gt;locator&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Select list keywords work on both lists and combo boxes. Key attributes
+ for select lists are id and name. See `Introduction` for details about
+ locators.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the multi-select list.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;values&lt;/b&gt;&amp;nbsp;The list of values to select&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Wait For Condition">
+<arguments>
+<arg>condition</arg>
+<arg>timeout=NONE</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Waits until the given JavaScript &lt;b&gt;condition&lt;/b&gt; is true.&lt;br&gt;
+ &lt;br&gt;
+ Fails, if the timeout expires, before the condition gets true. &lt;br&gt;
+ &lt;br&gt;
+ The condition may contain multiple JavaScript statements, but the last
+ statement must return a boolean. Otherwise this keyword will always hit
+ the timeout.&lt;br&gt;
+ &lt;br&gt;
+ Note that by default the code will be executed in the context of the
+ Selenium object itself, so &lt;b&gt;this&lt;/b&gt; will refer to the Selenium object.
+ Use &lt;b&gt;window&lt;/b&gt; to refer to the window of your application, e.g.
+ &lt;i&gt;window.document.getElementById('foo')&lt;/i&gt;.&lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about timeouts.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;condition&lt;/b&gt;&amp;nbsp;The JavaScript condition returning a boolean.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;timeout&lt;/b&gt;&amp;nbsp;Default=NONE. Optional timeout interval.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Wait Until Element Is Clickable">
+<arguments>
+<arg>locator</arg>
+<arg>timeout=NONE</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Waits until the element identified by &lt;b&gt;locator&lt;/b&gt; is clickable.&lt;br&gt;
+ &lt;br&gt;
+ Fails, if the timeout expires, before the element gets clickable. &lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about locators and timeouts.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;timeout&lt;/b&gt;&amp;nbsp;Default=NONE. Optional timeout interval.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Wait Until Element Is Not Clickable">
+<arguments>
+<arg>locator</arg>
+<arg>timeout=NONE</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Waits until the element identified by &lt;b&gt;locator&lt;/b&gt; is not clickable.&lt;br&gt;
+ &lt;br&gt;
+ Fails, if the timeout expires, before the element gets unclickable. &lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about locators and timeouts.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;timeout&lt;/b&gt;&amp;nbsp;Default=NONE. Optional timeout interval.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Wait Until Element Is Not Selected">
+<arguments>
+<arg>locator</arg>
+<arg>timeout=NONE</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Waits until the element identified by &lt;b&gt;locator&lt;/b&gt; is not selected.&lt;br&gt;
+ &lt;br&gt;
+ Fails, if the timeout expires, before the element gets unselected. &lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about locators and timeouts.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;timeout&lt;/b&gt;&amp;nbsp;Default=NONE. Optional timeout interval.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Wait Until Element Is Not Visible">
+<arguments>
+<arg>locator</arg>
+<arg>timeout=NONE</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Waits until the element identified by &lt;b&gt;locator&lt;/b&gt; is not visible.&lt;br&gt;
+ &lt;br&gt;
+ Fails, if the timeout expires, before the element gets invisible. &lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about locators and timeouts.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;timeout&lt;/b&gt;&amp;nbsp;Default=NONE. Optional timeout interval.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Wait Until Element Is Selected">
+<arguments>
+<arg>locator</arg>
+<arg>timeout=NONE</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Waits until the element identified by &lt;b&gt;locator&lt;/b&gt; is selected.&lt;br&gt;
+ &lt;br&gt;
+ Fails, if the timeout expires, before the element gets selected. &lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about locators and timeouts.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;timeout&lt;/b&gt;&amp;nbsp;Default=NONE. Optional timeout interval.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Wait Until Element Is Successfully Clicked">
+<arguments>
+<arg>locator</arg>
+<arg>timeout=NONE</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Waits until the element identified by &lt;b&gt;locator&lt;/b&gt; is sucessfully
+ clicked on.&lt;br&gt;
+ &lt;br&gt;
+ Fails, if the timeout expires, before the element gets clicked on. &lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about locators and timeouts.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;timeout&lt;/b&gt;&amp;nbsp;Default=NONE. Optional timeout interval.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Wait Until Element Is Visible">
+<arguments>
+<arg>locator</arg>
+<arg>timeout=NONE</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Waits until the element identified by &lt;b&gt;locator&lt;/b&gt; is visible.&lt;br&gt;
+ &lt;br&gt;
+ Fails, if the timeout expires, before the element gets visible. &lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about locators and timeouts.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;timeout&lt;/b&gt;&amp;nbsp;Default=NONE. Optional timeout interval.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Wait Until Page Contains">
+<arguments>
+<arg>condition</arg>
+<arg>timeout=NONE</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Waits until the current page contains &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Fails, if the timeout expires, before the text appears. &lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about timeouts.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;timeout&lt;/b&gt;&amp;nbsp;Default=NONE. Optional timeout interval.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Wait Until Page Contains Element">
+<arguments>
+<arg>locator</arg>
+<arg>timeout=NONE</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Waits until the element identified by &lt;b&gt;locator&lt;/b&gt; is found on the
+ current page.&lt;br&gt;
+ &lt;br&gt;
+ Fails, if the timeout expires, before the element appears. &lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about locators and timeouts.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;timeout&lt;/b&gt;&amp;nbsp;Default=NONE. Optional timeout interval.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Wait Until Page Not Contains">
+<arguments>
+<arg>text</arg>
+<arg>timeout=NONE</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Waits until the current page does not contain &lt;b&gt;text&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Fails, if the timeout expires, before the text disappears. &lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about timeouts.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;text&lt;/b&gt;&amp;nbsp;The text to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;timeout&lt;/b&gt;&amp;nbsp;Default=NONE. Optional timeout interval.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Wait Until Page Not Contains Element">
+<arguments>
+<arg>locator</arg>
+<arg>timeout=NONE</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Waits until the element identified by &lt;b&gt;locator&lt;/b&gt; is not found on the
+ current page.&lt;br&gt;
+ &lt;br&gt;
+ Fails, if the timeout expires, before the element disappears. &lt;br&gt;
+ &lt;br&gt;
+ See `Introduction` for details about locators and timeouts.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;locator&lt;/b&gt;&amp;nbsp;The locator to locate the element.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;timeout&lt;/b&gt;&amp;nbsp;Default=NONE. Optional timeout interval.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Wait Until Title Contains">
+<arguments>
+<arg>title</arg>
+<arg>timeout=NONE</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Waits until the current page title contains &lt;b&gt;title&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Fails, if the timeout expires, before the page title contains the given
+ title.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;title&lt;/b&gt;&amp;nbsp;The title to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;timeout&lt;/b&gt;&amp;nbsp;Default=NONE. Optional timeout interval.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Wait Until Title Is">
+<arguments>
+<arg>title</arg>
+<arg>timeout=NONE</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Waits until the current page title is exactly &lt;b&gt;title&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Fails, if the timeout expires, before the page title matches the given
+ title.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;title&lt;/b&gt;&amp;nbsp;The title to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;timeout&lt;/b&gt;&amp;nbsp;Default=NONE. Optional timeout interval.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Wait Until Title Is Not">
+<arguments>
+<arg>title</arg>
+<arg>timeout=NONE</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Waits until the current page title is not exactly &lt;b&gt;title&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Fails, if the timeout expires, before the page title does not match the
+ given title.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;title&lt;/b&gt;&amp;nbsp;The title to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;timeout&lt;/b&gt;&amp;nbsp;Default=NONE. Optional timeout interval.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Wait Until Title Not Contains">
+<arguments>
+<arg>title</arg>
+<arg>timeout=NONE</arg>
+<arg>message=NONE</arg>
+</arguments>
+<doc>Waits until the current page title does not contain &lt;b&gt;title&lt;/b&gt;.&lt;br&gt;
+ &lt;br&gt;
+ Fails, if the timeout expires, before the page title does not contain the
+ given title.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;title&lt;/b&gt;&amp;nbsp;The title to verify.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;timeout&lt;/b&gt;&amp;nbsp;Default=NONE. Optional timeout interval.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xpath Should Match X Times">
+<arguments>
+<arg>xpath</arg>
+<arg>expectedXpathCount</arg>
+<arg>message=NONE</arg>
+<arg>logLevel=INFO</arg>
+</arguments>
+<doc>Verify that the page contains the &lt;b&gt;expectedXpathCount&lt;/b&gt; of elements
+ located by the given &lt;b&gt;xpath&lt;/b&gt;.&lt;br&gt;&lt;br&gt;&lt;b&gt;Parameters:&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;xpath&lt;/b&gt;&amp;nbsp;The XPath to match page elements&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;expectedXpathCount&lt;/b&gt;&amp;nbsp;The expected number of located elements&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;&amp;nbsp;Default=NONE. Optional custom error message.&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;logLevel&lt;/b&gt;&amp;nbsp;Default=INFO. Optional log level.&lt;br&gt;</doc>
+<tags>
+</tags>
+</kw>
+</keywordspec>

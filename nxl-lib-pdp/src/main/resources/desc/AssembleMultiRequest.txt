@@ -1,0 +1,1 @@
+Returns a multi request reference. You need to pass at least 2 single request references.

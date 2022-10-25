@@ -1,0 +1,1 @@
+Invoke JSON REST request, returns an array of result reference

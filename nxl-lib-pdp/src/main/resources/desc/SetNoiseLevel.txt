@@ -1,0 +1,1 @@
+Set noise level value (integer), default is ICESdk.CE_NOISE_LEVEL_USER_ACTION which equals to 3
